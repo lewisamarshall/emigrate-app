@@ -25,6 +25,7 @@ window.load_data = (file)->
     exporter.d3.select('#existing_slider').remove()
     plotter = d3.json(file.path, (error, data)->
         exporter.data = data
+        exporter.time = data.time
         exporter.electrolytes = data.electrolytes
         exporter.ions = data.ions
         exporter.n_ions = data.ions.length
@@ -45,8 +46,8 @@ exporter.draw_data = ->
         )
 
 transform_data = (f)->
-        x = ['x'].concat(exporter.electrolytes[f][1].nodes)
-        c = [[exporter.ions[i]].concat(exporter.electrolytes[f][1].concentrations[i]) for i in [0...exporter.n_ions]]
+        x = ['x'].concat(exporter.electrolytes[f].nodes)
+        c = [[exporter.ions[i]].concat(exporter.electrolytes[f].concentrations[i]) for i in [0...exporter.n_ions]]
         [x].concat(c[0])
 
 exporter.next = ->
@@ -77,7 +78,7 @@ exporter.gotoframe = (n)->
     exporter.frame = n
     exporter.draw_data()
     d3.select('#sliderframe').text(n)
-    d3.select('#slidertime').text(exporter.electrolytes[n][0]+' s')
+    d3.select('#slidertime').text(exporter.time[n]+' s')
 
 # exporter.slider = d3.slider().on("slide", (evt, value)->exporter.gotoframe(value))
 #                           .axis(true)
