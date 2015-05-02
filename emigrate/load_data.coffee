@@ -1,12 +1,12 @@
 exporter=this
 
-holder = document.getElementById('holder')
+chart = document.getElementById('chart')
 
-holder.ondragover = () -> false
+chart.ondragover = () -> false
 
-holder.ondragleave = holder.ondragend = () -> false
+chart.ondragleave = chart.ondragend = () -> false
 
-holder.ondrop = (e) ->
+chart.ondrop = (e) ->
     e.preventDefault()
     file = e.dataTransfer.files[0]
     console.log('File you dragged here is', file.path)
@@ -27,7 +27,6 @@ window.load_data = (file)->
                                   .min(0)
                                   .max(exporter.n_electrolytes)
                                   .step(1)
-        d3.select('#slider1').exit()
         d3.select('#slider1').call(exporter.slider)
         exporter.reset()
         )
