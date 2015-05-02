@@ -1,2 +1,5 @@
 emigrate/bower_components
+Emigrate-win32
+Emigrate-x64
+Emigrate.app
 *.js
