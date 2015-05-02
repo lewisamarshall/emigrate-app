@@ -18,18 +18,64 @@
          }
     }
 
+    .axis {
+  font: 10px sans-serif;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+.axis .domain {
+  fill: none;
+  stroke: #000;
+  stroke-opacity: .3;
+  stroke-width: 10px;
+  stroke-linecap: round;
+}
+
+.axis .halo {
+  fill: none;
+  stroke: #ddd;
+  stroke-width: 8px;
+  stroke-linecap: round;
+}
+
+.slider .handle {
+  fill: #fff;
+  stroke: #000;
+  stroke-opacity: .5;
+  stroke-width: 1.25px;
+  cursor: crosshair;
+}
+
+div.slider {
+      padding-top: 0px;
+      padding-right: 5em;
+      padding-bottom: 0px;
+      padding-left: 5em;
+    }
+
+    div.chart {
+          height: 600px;
+        }
+
  </style>
   </head>
   <body>
     <h1>Emigrate</h1>
     We are using io.js <script>document.write(process.version)</script>
     and Electron <script>document.write(process.versions['electron'])</script>.
-    <div id='chart'></div>
-    <div id="slider1" class='slider'></div>
+    <div id='chart' class='chart'></div>
+    <div id="sliderbox" class='slider'>
+        Frame: <span id="sliderframe">0</span>
+        Time: <span id="slidertime">0</span>
+    </div>
     <script type='text/javascript' src='concentration_chart.js'></script>
-    <h2>Information: </h2>
     <script type="text/javascript" src="load_data.js"></script>
-    
+    <!-- // <script type='text/javascript' src='slider_tmp.js'></script> -->
+    <!-- <h2>Information: </h2> -->
+
+
     <!-- <p><button onclick=reset()>Plot</button></p>
     <p><button onclick=next()>Next</button></p>
     <p><button onclick=prev()>Previous</button></p>

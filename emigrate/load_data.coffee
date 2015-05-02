@@ -13,21 +13,29 @@ chart.ondrop = (e) ->
     window.load_data(file)
     false
 
+exporter.slider = d3.slider().on("slide", (evt, value)->exporter.gotoframe(value))
+exporter.slider_axis = exporter.slider.axis(true)
+                                .min(0)
+                                .max(1)
+                                .step(1)
+d3.select('#sliderbox').append('div').attr('id', 'existing_slider').call(exporter.slider)
+
 window.load_data = (file)->
     exporter.frame = 0
+    exporter.d3.select('#existing_slider').remove()
     plotter = d3.json(file.path, (error, data)->
         exporter.data = data
         exporter.electrolytes = data.electrolytes
         exporter.ions = data.ions
         exporter.n_ions = data.ions.length
         exporter.n_electrolytes = data.electrolytes.length
-        # exporter.slider.remove()
         exporter.slider = d3.slider().on("slide", (evt, value)->exporter.gotoframe(value))
-                                  .axis(true)
-                                  .min(0)
-                                  .max(exporter.n_electrolytes)
-                                  .step(1)
-        d3.select('#slider1').call(exporter.slider)
+        exporter.slider_axis = exporter.slider.axis(true)
+                                        .min(0)
+                                        .max(exporter.n_electrolytes)
+                                        .step(1)
+        d3.select('#sliderbox').append('div').attr('id', 'existing_slider').call(exporter.slider)
+
         exporter.reset()
         )
 
@@ -68,9 +76,11 @@ exporter.play = ()->
 exporter.gotoframe = (n)->
     exporter.frame = n
     exporter.draw_data()
+    d3.select('#sliderframe').text(n)
+    d3.select('#slidertime').text(exporter.electrolytes[n][0]+' s')
 
-exporter.slider = d3.slider().on("slide", (evt, value)->exporter.gotoframe(value))
-                          .axis(true)
-                          .min(0)
-                          .max(1000)
-                          .step(1)
+# exporter.slider = d3.slider().on("slide", (evt, value)->exporter.gotoframe(value))
+#                           .axis(true)
+#                           .min(0)
+#                           .max(1000)
+#                           .step(1)
