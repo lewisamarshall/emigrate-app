@@ -20,16 +20,27 @@ window.load_data = (file)->
         exporter.electrolytes = data.electrolytes
         exporter.ions = data.ions
         exporter.n_ions = data.ions.length
+        exporter.n_electrolytes = data.electrolytes.length
+        # exporter.slider.remove()
+        exporter.slider = d3.slider().on("slide", (evt, value)->exporter.gotoframe(value))
+                                  .axis(true)
+                                  .min(0)
+                                  .max(exporter.n_electrolytes)
+                                  .step(1)
+        d3.select('#slider1').exit()
+        d3.select('#slider1').call(exporter.slider)
         exporter.reset()
         )
 
 exporter.draw_data = ->
-    x = ['x'].concat(exporter.electrolytes[exporter.frame][1].nodes)
-    c = [[exporter.ions[i]].concat(exporter.electrolytes[exporter.frame][1].concentrations[i]) for i in [0...exporter.n_ions]]
-    # console.log(c)
     exporter.chart.load(
-        columns: [x].concat(c[0])
+        columns: transform_data(exporter.frame)
         )
+
+transform_data = (f)->
+        x = ['x'].concat(exporter.electrolytes[f][1].nodes)
+        c = [[exporter.ions[i]].concat(exporter.electrolytes[f][1].concentrations[i]) for i in [0...exporter.n_ions]]
+        [x].concat(c[0])
 
 exporter.next = ->
     exporter.frame +=1
@@ -40,21 +51,27 @@ exporter.prev = ->
     exporter.draw_data()
 
 exporter.reset = ()->
+    exporter.chart.unload()
     exporter.frame = 0
     exporter.draw_data()
 
-exporter.play = (frame_rate=100)->
-    # while exporter.frame < exporter.data.electrolytes.length
-    setTimeout(window.next(), frame_rate)
-    setTimeout(window.next(), frame_rate)
-    setTimeout(window.next(), frame_rate)
-    setTimeout(window.next(), frame_rate)
-    setTimeout(window.next(), frame_rate)
-    setTimeout(window.next(), frame_rate)
-    setTimeout(window.next(), frame_rate)
-    setTimeout(window.next(), frame_rate)
-    setTimeout(window.next(), frame_rate)
-    setTimeout(window.next(), frame_rate)
-    setTimeout(window.next(), frame_rate)
-    setTimeout(window.next(), frame_rate)
-    setTimeout(window.next(), frame_rate)
+flow_next = ->
+    if exporter.frame<exporter.electrolytes.length
+        exporter.frame +=1
+        exporter.chart.flow(
+            columns: transform_data(exporter.frame)
+            done: flow_next
+            )
+
+exporter.play = ()->
+    flow_next()
+
+exporter.gotoframe = (n)->
+    exporter.frame = n
+    exporter.draw_data()
+
+exporter.slider = d3.slider().on("slide", (evt, value)->exporter.gotoframe(value))
+                          .axis(true)
+                          .min(0)
+                          .max(1000)
+                          .step(1)

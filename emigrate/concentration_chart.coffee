@@ -19,6 +19,9 @@ this.chart = c3.generate(
     transition:
         duration: 10
 
+    point:
+        show: false
+
     tooltip:
         format:
             title: (d)-> 'x='+d.toPrecision(3)

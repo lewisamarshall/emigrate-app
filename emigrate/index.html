@@ -4,12 +4,18 @@
     <title>Emigrate Visualizer</title>
     <link type="text/css" href="bower_components/c3/c3.css" rel="stylesheet">
     <script type="text/javascript" src="bower_components/d3/d3.min.js"></script>
+    <link type="text/css" href="d3.slider/d3.slider.css" rel="stylesheet">
+    <script type="text/javascript" src="d3.slider/d3.slider.js"></script>
     <script type="text/javascript" src="bower_components/c3/c3.min.js"></script>
     <script type="text/javascript" src="enable_dev_tools.js"></script>
     <style>
     body { font: 12px Arial;
            background: white;
         }
+      .slider {
+         margin-top: .5cm;
+         margin-bottom: 1cm;
+         }
     }
 
  </style>
@@ -19,18 +25,16 @@
     <!-- We are using io.js <script>document.write(process.version)</script>
     and Electron <script>document.write(process.versions['electron'])</script>. -->
     <div id='chart'></div>
-    <div id="holder">
-        Drag data files here.
-    </div>
+    <div id="slider1" class='slider'></div>
+    <div id="holder">Load file.</div>
     <script type='text/javascript' src='concentration_chart.js'></script>
-    <!-- // <script src='concentration_plot.js'></script> -->
     <h2>Information: </h2>
-    <!-- <p><input id=file_input type=file name=file></input></p> -->
     <script type="text/javascript" src="load_data.js"></script>
     <p><button onclick=reset()>Plot</button></p>
     <p><button onclick=next()>Next</button></p>
     <p><button onclick=prev()>Previous</button></p>
-    <!-- <p><button onclick=play()>Play</button></p> -->
+    <p><button onclick=play()>Play</button></p>
+
   </body>
 
 </html>
