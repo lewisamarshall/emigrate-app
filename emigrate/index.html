@@ -56,16 +56,18 @@ div.slider {
     }
 
     div.chart {
-          height: 600px;
+          height: 300px;
         }
 
  </style>
   </head>
   <body>
     <h1>Emigrate</h1>
+    <p><button onclick=open_file()>Open</button></p>
     We are using io.js <script>document.write(process.version)</script>
     and Electron <script>document.write(process.versions['electron'])</script>.
-    <div id='chart' class='chart'></div>
+    <div id='concentration_chart' class='chart'></div>
+    <div id='property_chart' class='chart'></div>
     <div id="sliderbox" class='slider'>
         Frame: <span id="sliderframe">0</span>
         Time: <span id="slidertime">0</span>
@@ -76,8 +78,7 @@ div.slider {
     <!-- <h2>Information: </h2> -->
 
 
-    <!-- <p><button onclick=reset()>Plot</button></p>
-    <p><button onclick=next()>Next</button></p>
+    <!-- <p><button onclick=next()>Next</button></p>
     <p><button onclick=prev()>Previous</button></p>
     <p><button onclick=play()>Play</button></p> -->
 

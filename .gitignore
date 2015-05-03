@@ -3,3 +3,4 @@ Emigrate-win32
 Emigrate-x64
 Emigrate.app
 *.js
+*.json

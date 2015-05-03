@@ -1,6 +1,8 @@
 exporter=this
+remote = require 'remote'
+dialog = remote.require 'dialog'
 
-chart = document.getElementById('chart')
+chart = document.getElementById('concentration_chart')
 
 chart.ondragover = () -> false
 
@@ -10,7 +12,7 @@ chart.ondrop = (e) ->
     e.preventDefault()
     file = e.dataTransfer.files[0]
     console.log('File you dragged here is', file.path)
-    window.load_data(file)
+    window.load_data(file.path)
     false
 
 exporter.slider = d3.slider().on("slide", (evt, value)->exporter.gotoframe(value))
@@ -23,7 +25,7 @@ d3.select('#sliderbox').append('div').attr('id', 'existing_slider').call(exporte
 window.load_data = (file)->
     exporter.frame = 0
     exporter.d3.select('#existing_slider').remove()
-    plotter = d3.json(file.path, (error, data)->
+    plotter = d3.json(file, (error, data)->
         exporter.data = data
         exporter.time = data.time
         exporter.electrolytes = data.electrolytes
@@ -44,11 +46,20 @@ exporter.draw_data = ->
     exporter.chart.load(
         columns: transform_data(exporter.frame)
         )
+    exporter.property_chart.load(
+        columns: transform_property_data(exporter.frame)
+    )
+
 
 transform_data = (f)->
         x = ['x'].concat(exporter.electrolytes[f].nodes)
         c = [[exporter.ions[i]].concat(exporter.electrolytes[f].concentrations[i]) for i in [0...exporter.n_ions]]
         [x].concat(c[0])
+
+transform_property_data = (f)->
+    x = ['x'].concat(exporter.electrolytes[f].nodes)
+    p = [['pH'].concat(exporter.electrolytes[f].pH)]
+    [x].concat(p)
 
 exporter.next = ->
     exporter.frame +=1
@@ -85,3 +96,15 @@ exporter.gotoframe = (n)->
 #                           .min(0)
 #                           .max(1000)
 #                           .step(1)
+
+exporter.open_file = ()->
+    console.log('pressed')
+    files = dialog.showOpenDialog(
+        properties: [ 'openFile']
+        filters: [
+            name: 'JSON',
+            extensions: ['json']
+            ]
+    )
+    # console.log(files[0])
+    window.load_data(files[0])

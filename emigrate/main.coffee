@@ -20,6 +20,7 @@ app.on('ready', ()->
     # and load the index.html of the app.
     mainWindow.loadUrl('file://' + __dirname + '/index.html')
 
+
     # Emitted when the window is closed.
     # Dereference the window object, usually you would store windows
     # in an array if your app supports multi windows, this is the time
