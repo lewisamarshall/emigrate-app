@@ -29,13 +29,13 @@ this.chart = c3.generate(
             tick:
                  values: [0, .05, .1, .15, .2, .25, .3, .35, .4, .45, .5]
                  count: 5
-                 format: (d)-> Math.round(d*1000)+' mM'
+                 format: (d)-> d3.round(d*1000)+' mM'
         x:
             label: 'Length'
             tick:
                  fit: true
                  count: 5
-                 format: (d)-> Math.round(d*10000)/10+' mm'
+                 format: (d)-> d3.round(d*1000,1)+' mm'
     transition:
         duration: 10
 
@@ -45,8 +45,8 @@ this.chart = c3.generate(
 
     tooltip:
         format:
-            title: (d)-> 'x='+d.toPrecision(3)
-            value:  (value, ratio, id)-> Math.round(value*10000)/10 + ' mM'
+            title: (d)-> 'x='+d3.round(d*1000,2)+' mm'
+            value:  (value, ratio, id)-> d3.round(value*1000,2) + ' mM'
     )
 
 this.property_chart = c3.generate(
@@ -68,12 +68,16 @@ this.property_chart = c3.generate(
     axis:
         y:
             label: ''
+            tick:
+                 fit: true
+                 count: 5
+                 format: (d)-> d3.round(d, 2)
         x:
             label: 'Length'
             tick:
                  fit: true
                  count: 5
-                 format: (d)-> Math.round(d*10000)/10+' mm'
+                 format: (d)-> d3.round(d*1000, 1)+' mm'
     transition:
         duration: 10
 
@@ -83,6 +87,6 @@ this.property_chart = c3.generate(
 
     tooltip:
         format:
-            title: (d)-> 'x='+d.toPrecision(3)
-            value:  (value, ratio, id)-> Math.round(value*100)/100
+            title: (d)-> 'x='+d3.round(d*1000,2)+' mm'
+            value:  (value, ratio, id)-> d3.round(value, 2)
     )
