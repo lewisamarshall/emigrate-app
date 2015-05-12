@@ -1,87 +1,21 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Emigrate Visualizer</title>
-    <link type="text/css" href="bower_components/c3/c3.css" rel="stylesheet">
-    <script type="text/javascript" src="bower_components/d3/d3.min.js"></script>
-    <link type="text/css" href="d3.slider/d3.slider.css" rel="stylesheet">
-    <script type="text/javascript" src="d3.slider/d3.slider.js"></script>
-    <script type="text/javascript" src="bower_components/c3/c3.min.js"></script>
-    <script type="text/javascript" src="enable_dev_tools.js"></script>
-    <style>
-    body { font: 12px Arial;
-           background: white;
-        }
-      .slider {
-         margin-top: .5cm;
-         margin-bottom: 1cm;
-         }
-    }
 
-    .axis {
-  font: 10px sans-serif;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  user-select: none;
-}
+<head>
+<title>Welcome to Emigrate</title>
+<link type="text/css" href="./css/styles.css" rel="stylesheet">
+</head>
 
-.axis .domain {
-  fill: none;
-  stroke: #000;
-  stroke-opacity: .3;
-  stroke-width: 10px;
-  stroke-linecap: round;
-}
+<body>
+    <div id="navbar">
+      <ul>
+        <li><a href="./visualizer/index.html">Visualizer</a></li>
+        <li><a href="./constructor/index.html">Constructor</a></li>
+        <li><a href="./help/index.html">Help</a></li>
+      </ul>
+   </div>
 
-.axis .halo {
-  fill: none;
-  stroke: #ddd;
-  stroke-width: 8px;
-  stroke-linecap: round;
-}
-
-.slider .handle {
-  fill: #fff;
-  stroke: #000;
-  stroke-opacity: .5;
-  stroke-width: 1.25px;
-  cursor: crosshair;
-}
-
-div.slider {
-      padding-top: 0px;
-      padding-right: 5em;
-      padding-bottom: 0px;
-      padding-left: 5em;
-    }
-
-    div.chart {
-          height: 300px;
-        }
-
- </style>
-  </head>
-  <body>
-    <h1>Emigrate</h1>
-    <p><button onclick=open_file()>Open</button></p>
-    We are using io.js <script>document.write(process.version)</script>
-    and Electron <script>document.write(process.versions['electron'])</script>.
-    <div id='concentration_chart' class='chart'></div>
-    <div id='property_chart' class='chart'></div>
-    <div id="sliderbox" class='slider'>
-        Frame: <span id="sliderframe">0</span>
-        Time: <span id="slidertime">0</span>
-    </div>
-    <script type='text/javascript' src='concentration_chart.js'></script>
-    <script type="text/javascript" src="load_data.js"></script>
-    <!-- // <script type='text/javascript' src='slider_tmp.js'></script> -->
-    <!-- <h2>Information: </h2> -->
-
-
-    <!-- <p><button onclick=next()>Next</button></p>
-    <p><button onclick=prev()>Previous</button></p>
-    <p><button onclick=play()>Play</button></p> -->
-
-  </body>
+   <h1>Welcome to Emigrate!</h1>
+</body>
 
 </html>
