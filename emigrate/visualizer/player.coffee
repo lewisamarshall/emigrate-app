@@ -3,7 +3,7 @@ remote = require 'remote'
 dialog = remote.require 'dialog'
 d3 = require '../bower_components/d3/d3.js'
 c3 = require '../bower_components/c3/c3.js'
-# Slider = require 'slider.js'.Slider
+Slider = require('./slider.js').Slider
 
 
 class Player
@@ -31,8 +31,6 @@ class Player
     chart_properties.bindto='#property_chart'
     @properties_chart = c3.generate(chart_properties)
 
-    @slider = new Slider
-
   open_file: =>
     file = dialog.showOpenDialog(
       properties: ['openFile']
@@ -57,9 +55,11 @@ class Player
       (error, data)->
         that.parsed(data)
         that.draw()
+        that.slider = new Slider(that.n_electrolytes, that.go_to_frame)
       )
 
-  draw: ->
+
+  draw: =>
     @concentration_chart.load(
       columns: @transform(@frame)
     )
@@ -67,12 +67,19 @@ class Player
     #   columns: @transform_property_data(@frame)
     # )
 
-  transform: (frame)->
+  transform: (frame)=>
     x = ['x'].concat(@electrolytes[frame].nodes)
     c = [[@ions[i]].concat(@electrolytes[frame].concentrations[i]) for i in [0...@n_ions]]
     [x].concat(c[0])
 
   update_slider: ->
     null
+
+  go_to_frame: (frame) =>
+    if frame !== @frame:
+      @frame = frame
+      @draw()
+      d3.select('#sliderframe').text(frame)
+    # d3.select('#slidertime').text(exporter.time[frame]+' s')
 
 exporter.player = new Player

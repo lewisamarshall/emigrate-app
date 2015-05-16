@@ -6,3 +6,5 @@ asar pack emigrate/ dist/Emigrate-x64/resources/app.asar
 # zip -ru dist/Emigrate.app.zip dist/Emigrate.app
 # zip -ru dist/dist/Emigrate-win32.zip dist/Emigrate-win32
 # zip -ru dist/Emigrate-x64.zip dist/Emigrate-x64
+
+open dist/Emigrate.app
