@@ -11,7 +11,7 @@
 
     <!-- Load CSS -->
     <link type="text/css" href="../bower_components/c3/c3.css" rel="stylesheet">
-    <link type="text/css" href="../d3.slider/d3.slider.css" rel="stylesheet">
+    <link type="text/css" href="../bower_components/d3.slider/d3.slider.css" rel="stylesheet">
     <link type="text/css" href="../css/styles.css" rel="stylesheet">
 
     <title>Emigrate Visualizer</title>
@@ -21,7 +21,7 @@
 <body>
     <h1>Emigrate</h1>
     <p>
-        <button onclick=open_file()>Open</button>
+        <button onclick=player.open_file()>Open</button>
     </p>
 
     We are using io.js<script>document.write(process.version)</script>and Electron
@@ -33,8 +33,7 @@
         Frame: <span id="sliderframe">0</span>
         Time: <span id="slidertime">0</span>
     </div>
-    <script type="text/javascript" src="concentration_chart.js"></script>
-    <script type="text/javascript" src="load_data.js"></script>
+    <script src="player.js"></script>
     <!-- <h2>Information: </h2> -->
 
 

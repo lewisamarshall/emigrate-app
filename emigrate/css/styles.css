@@ -1,6 +1,6 @@
 body {
   font: 12px Arial;
-  background: #92a7e0;
+  background: #f5e9e2;
 }
 .slider {
   margin-top: 0.5cm;
@@ -45,7 +45,7 @@ div.chart {
   cellpadding: 0;
   border: 0;
   list-style-type: none;
-  background-color: #5b507a;
+  background-color: #7b435b;
 }
 #navbar ul li {
   display: inline;
@@ -54,9 +54,9 @@ div.chart {
   text-decoration: none;
   padding: .2em 1em;
   color: white;
-  background-color: #5b507a;
+  background-color: #7b435b;
 }
 #navbar ul li a:hover {
   color: #0EC6D7;
-  background-color: #5b507a;
+  background-color: #7b435b;
 }
