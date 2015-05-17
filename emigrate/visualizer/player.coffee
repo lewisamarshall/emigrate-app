@@ -60,12 +60,13 @@ class Player
 
 
   draw: =>
+    that = @
     @concentration_chart.load(
       columns: @transform(@frame)
     )
-    # @property_chart.load(
-    #   columns: @transform_property_data(@frame)
-    # )
+    @properties_chart.load(
+      columns: @transform_property_data(@frame)
+    )
 
   transform: (frame)=>
     x = ['x'].concat(@electrolytes[frame].nodes)
@@ -76,10 +77,15 @@ class Player
     null
 
   go_to_frame: (frame) =>
-    if frame !== @frame:
+    if (frame != @frame)
       @frame = frame
       @draw()
       d3.select('#sliderframe').text(frame)
     # d3.select('#slidertime').text(exporter.time[frame]+' s')
+
+  transform_property_data: (frame)=>
+    x = ['x'].concat(@electrolytes[frame].nodes)
+    p = [['pH'].concat(@electrolytes[frame].pH)]
+    [x].concat(p)
 
 exporter.player = new Player
