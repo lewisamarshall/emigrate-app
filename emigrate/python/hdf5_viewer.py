@@ -14,7 +14,6 @@ class FileViewer(object):
         for line in iter(sys.stdin.readline, ''):
             frame = int(line)
             print self.electromigration[frame].serialize(True)
-
             sys.stdout.flush()
 
 if __name__ == '__main__':
