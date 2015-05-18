@@ -1,7 +1,7 @@
 exporter=this
-d3 = require '../bower_components/d3/d3.js'
+# d3 = require '../bower_components/d3/d3.js'
 
-exporter.chart_properties ={
+chart_properties ={
   padding:
     top: 0
     right: 150
@@ -16,25 +16,44 @@ exporter.chart_properties ={
     position: 'right'
     x: 30
     y: 0
-  axis:
-    x:
-      label: 'Length'
-      tick:
-        fit: true
-        count: 5
-        format: (d)->d3.round(d*1000, 1)+' mm'
-    y:
-      label: 'Concentration'
-      tick:
-        #    values: [0, .05, .1, .15, .2, .25, .3, .35, .4, .45, .5]
-        count: 5
-        format: (d)-> d3.round(d*1000)+' mM'
   transition:
     duration: 10
-  points:
+  point:
     show: true
-    r: 1
+    r: 1.5
   tooltip:
     format:
       title: (d)->'x='+d3.round(d*1000, 2)+' mm'
+  }
+
+exporter.concentration_chart_properties = Object.create(chart_properties)
+exporter.concentration_chart_properties.bindto = '#concentration_chart'
+exporter.concentration_chart_properties.axis = {
+  x:
+    label: 'Length'
+    tick:
+      fit: true
+      count: 5
+      format: (d)->d3.round(d*1000, 1)+' mm'
+  y:
+    label: 'Concentration'
+    tick:
+      count: 5
+      format: (d)-> d3.round(d*1000)+' mM'
+  }
+
+exporter.properties_chart_properties = Object.create(chart_properties)
+exporter.properties_chart_properties.bindto = '#property_chart'
+exporter.properties_chart_properties.axis = {
+  x:
+    label: 'Length'
+    tick:
+      fit: true
+      count: 5
+      format: (d)->d3.round(d*1000, 1)+' mm'
+  y:
+    label: 'Properties'
+    tick:
+      count: 5
+      format: (d)-> d3.round(d)
   }

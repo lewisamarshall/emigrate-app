@@ -1,91 +1,66 @@
 exporter=this
+# exporter.link = require('./link.js').link
 remote = require 'remote'
 dialog = remote.require 'dialog'
 d3 = require '../bower_components/d3/d3.js'
 c3 = require '../bower_components/c3/c3.js'
 Slider = require('./slider.js').Slider
-
+Link = require('./link.js').Link
+# link = require('./link.js').link
+viewer_file = '../python/hdf5_viewer.py'
+chart_properties = require('./chart_properties')
+concentration_chart_properties = chart_properties.concentration_chart_properties
+properties_chart_properties = chart_properties.properties_chart_properties
+python = '/usr/local/bin/python2.7'
+viewer_file = '/Users/lewis/Documents/github/emigrate_app/emigrate/python/hdf5_viewer.py'
 
 class Player
 
-  data: null
-  ions: null
-  time: null
-  electrolytes: null
-  n_ions: null
-  n_electrolytes: null
-
-  frame: 0
+  # Connection to data file
+  link: null
   file: null
-  slider: null
-  chart_properties = require('./chart_properties').chart_properties
+
+  # Information from the open file
+  frame: 0
+  frames: null
+
+  # Elements
   concentration_chart: null
   properties_chart: null
+  slider: null
 
   constructor: () ->
-    frame = 0
+    @frame = 0
 
-    chart_properties.bindto='#concentration_chart'
-    @concentration_chart = c3.generate(chart_properties)
+    @concentration_chart = c3.generate(concentration_chart_properties)
 
-    chart_properties.bindto='#property_chart'
-    @properties_chart = c3.generate(chart_properties)
+    @properties_chart = c3.generate(properties_chart_properties)
 
   open_file: =>
     file = dialog.showOpenDialog(
       properties: ['openFile']
-      filters: [
-        name: 'JSON',
-        extensions: ['json']
-        ]
+      filters: [{name: 'JSON', extensions: ['json']},
+        {name: 'HDF5', extensions: ['hdf5']}]
     )[0]
-    @load_json(file)
+    @frame = 0
+    @link = new Link(python, viewer_file, @draw)
+    @link.write(@frame)
 
-  parsed: (data)=>
-    @data = data
-    @time = data.time
-    @electrolytes = data.electrolytes
-    @ions = data.ions
-    @n_ions = @ions.length
-    @n_electrolytes = @electrolytes.length
+  draw: (data) =>
+    """Callback function to draw new frame data."""
+    # If this is the first callback, create the slider
+    if not @slider
+      @frames = data.n_electrolytes
+      @slider = new Slider(@frames, @go_to_frame)
 
-  load_json: (filename) =>
-    that = this
-    d3.json(filename,
-      (error, data)->
-        that.parsed(data)
-        that.draw()
-        that.slider = new Slider(that.n_electrolytes, that.go_to_frame)
-      )
-
-
-  draw: =>
-    that = @
-    @concentration_chart.load(
-      columns: @transform(@frame)
-    )
-    @properties_chart.load(
-      columns: @transform_property_data(@frame)
-    )
-
-  transform: (frame)=>
-    x = ['x'].concat(@electrolytes[frame].nodes)
-    c = [[@ions[i]].concat(@electrolytes[frame].concentrations[i]) for i in [0...@n_ions]]
-    [x].concat(c[0])
-
-  update_slider: ->
-    null
+    @concentration_chart.load(json:data.concentrations)
+    @properties_chart.load(json:data.properties)
+    d3.select('#sliderframe').text(@frame)
+    # d3.select('#slidertime').text(exporter.time[frame]+' s')
 
   go_to_frame: (frame) =>
     if (frame != @frame)
       @frame = frame
-      @draw()
-      d3.select('#sliderframe').text(frame)
-    # d3.select('#slidertime').text(exporter.time[frame]+' s')
-
-  transform_property_data: (frame)=>
-    x = ['x'].concat(@electrolytes[frame].nodes)
-    p = [['pH'].concat(@electrolytes[frame].pH)]
-    [x].concat(p)
+      @link.write(@frame)
 
 exporter.player = new Player

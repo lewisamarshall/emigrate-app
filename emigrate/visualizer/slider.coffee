@@ -12,10 +12,11 @@ class Slider
   slider: null
   handle: null
   brushed: null
+  domain: null
 
-
-  constructor: (my_domain, @brush_event)->
-    @make_slider(my_domain)
+  constructor: (domain, @brush_event)->
+    @domain = domain
+    @make_slider(domain)
 
   make_slider: (domain)->
     @x_scale = d3.scale.linear()
@@ -71,7 +72,13 @@ class Slider
         thing = d3.mouse(this)[0]
         value = d3.round(that.x_scale.invert(thing))
         that.brush.extent([value, value])
+      if value >= (that.domain-1)
+        console.log(value)
+        value = that.domain-1
+      if (value <= 0)
+        value = 0
       that.handle.attr("cx", that.x_scale(value))
+
       that.brush_event(value)
 
     @brush.on("brush", @brushed)
