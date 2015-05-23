@@ -1,5 +1,7 @@
 // out: ./css/styles.css, sourcemap: false, compress: false
 
+
+// Color Palette
 @button: #7B435B;
 @text: #696D7D;
 @highlight: #6F9283;
@@ -10,6 +12,35 @@ body {
     font: 12px Arial;
     background: @background;
 }
+
+// Navigation Bar
+nav ul {
+   margin: 0;
+   padding: 5px;
+   cellspacing: 0;
+   cellpadding: 0;
+   border: 0;
+   list-style-type: none;
+   background-color: @button;
+   }
+
+nav ul li {
+   display: inline;
+   }
+
+nav ul li a {
+   text-decoration: none;
+   padding: .2em 1em;
+   color: white;
+   background-color: @button;
+   }
+
+nav ul li a:hover {
+   color: #0EC6D7;
+   background-color: @button;
+   }
+
+// Slider
 .slider {
     margin-top: 0.5cm;
     margin-bottom: 1cm;
@@ -43,9 +74,7 @@ body {
     stroke-linecap: round;
 }
 
-// div.slider {
-//     padding: 0 5em;
-// }
+// Visualization Page
 div.chart {
     height: 270px;
 }
@@ -54,31 +83,16 @@ div.tree{
     background: white;
     height: 50;
     padding: 5px;
-
 }
 
-#navbar ul {
-   margin: 0;
-   padding: 5px;
-   cellspacing: 0;
-   cellpadding: 0;
-   border: 0;
-   list-style-type: none;
-   background-color: @button;
-   }
+div.sidebar{
+    float: left;
+    clear: both;
+    width: 20%;
+    background-color: @mouseover;
+    height: 500px;
+}
 
-#navbar ul li {
-   display: inline;
-   }
-
-#navbar ul li a {
-   text-decoration: none;
-   padding: .2em 1em;
-   color: white;
-   background-color: @button;
-   }
-
-#navbar ul li a:hover {
-   color: #0EC6D7;
-   background-color: @button;
-   }
+div.sidebar button{
+    margin: auto;
+}

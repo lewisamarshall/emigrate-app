@@ -4,16 +4,11 @@
 <head>
 
     <!-- Load Scripts -->
-    <script type="text/javascript" src="../bower_components/d3/d3.min.js"></script>
-    <script type="text/javascript" src="../bower_components/c3/c3.min.js"></script>
-    <script type="text/javascript" src="../bower_components/d3.slider/d3.slider.js"></script>
     <script type="text/javascript" src="../enable_dev_tools.js"></script>
     <script src="../bower_components/jquery/dist/jquery.js"></script>
     <script src="../bower_components/jqtree/tree.jquery.js"></script>
 
     <!-- Load CSS -->
-    <link type="text/css" href="../bower_components/c3/c3.css" rel="stylesheet">
-    <link type="text/css" href="../bower_components/d3.slider/d3.slider.css" rel="stylesheet">
     <link type="text/css" href="../css/styles.css" rel="stylesheet">
     <link rel="stylesheet" href="../bower_components/jqtree/jqtree.css">
 
@@ -22,41 +17,27 @@
 </head>
 
 <body>
-    <div id="navbar">
+    <nav>
       <ul>
         <li><a href="../index.html">Home</a></li>
         <li><a href="../visualizer/index.html">Visualizer</a></li>
         <li><a href="./index.html">Constructor</a></li>
         <li><a href="../help/index.html">Help</a></li>
       </ul>
+    </nav>
+
+    <div class="sidebar">
+        <p><button>Channel </button></p>
+        <p><button>Solutions</button></p>
+        <p><button>Field and flow</button></p>
     </div>
-
-    <div id="solution_tree" class="tree">
-    </div>
-
-    <script>
-            var data = [
-        {
-            label: 'node1',
-            children: [
-                { label: 'child1' },
-                { label: 'child2' }
-            ]
-        },
-        {
-            label: 'node2',
-            children: [
-                { label: 'child3' }
-            ]
-        }
-        ];
-
-                $(function() {
-            $('#solution_tree').tree({
-                data: data
-            });
-        });
-    </script>
+    <p>
+        <form>
+            <input type="search" placeholder="ion"></input>
+            <input type="number" placeholder="concentration (mM)"></input>
+            <input type="submit" value="add"></input>
+        </form>
+    </p>
 
 </body>
 
