@@ -1,18 +1,13 @@
 exporter=this
-# exporter.link = require('./link.js').link
 remote = require 'remote'
 dialog = remote.require 'dialog'
 d3 = require '../bower_components/d3/d3.js'
 c3 = require '../bower_components/c3/c3.js'
 Slider = require('./slider.js').Slider
 Link = require('./link.js').Link
-# link = require('./link.js').link
-viewer_file = '../python/hdf5_viewer.py'
 chart_properties = require('./chart_properties')
 concentration_chart_properties = chart_properties.concentration_chart_properties
 properties_chart_properties = chart_properties.properties_chart_properties
-python = '/usr/local/bin/python2.7'
-viewer_file = '/Users/lewis/Documents/github/emigrate_app/emigrate/python/hdf5_viewer.py'
 
 class Player
 
@@ -30,21 +25,21 @@ class Player
   slider: null
 
   constructor: () ->
-    @frame = 0
+    @link = new Link('emigrate', @draw)
 
     @concentration_chart = c3.generate(concentration_chart_properties)
 
     @properties_chart = c3.generate(properties_chart_properties)
 
   open_file: =>
+    @frame = 0
     file = dialog.showOpenDialog(
       properties: ['openFile']
       filters: [{name: 'JSON', extensions: ['json']},
         {name: 'HDF5', extensions: ['hdf5']}]
     )[0]
-    @frame = 0
-    @link = new Link(python, viewer_file, @draw)
-    @link.write(@frame)
+    @link.write('open '+file)
+    @link.write('frame '+@frame)
 
   draw: (data) =>
     """Callback function to draw new frame data."""
@@ -61,6 +56,6 @@ class Player
   go_to_frame: (frame) =>
     if (frame != @frame)
       @frame = frame
-      @link.write(@frame)
+      @link.write('frame ' + @frame)
 
 exporter.player = new Player

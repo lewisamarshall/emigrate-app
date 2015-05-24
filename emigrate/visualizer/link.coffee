@@ -9,8 +9,8 @@ class Link
   reader: null
   err_reader: null
 
-  constructor: (process, executable, callback)->
-    @process = spawn(process, ['-u', executable])
+  constructor: (process, callback)->
+    @process = spawn(process)
 
     # Call the callback through the outlet for each returned item.
     @reader = readline.createInterface(input: @process.stdout)
@@ -24,7 +24,8 @@ class Link
     @process.kill()
 
   write: (msg)=>
-    msg = JSON.stringify(msg)+'\n'
+    # msg = JSON.stringify(msg)+'\n'
+    msg = msg+'\n'
     @process.stdin.write(msg)
 
   outlet: (json_data)=>
@@ -35,8 +36,8 @@ class Link
 exporter.Link = Link
 # #
 # call = (d)=>console.log(d)
-# link = new Link('/usr/local/bin/python2.7', '/Users/lewis/Documents/github/emigrate_app/emigrate/python/hdf5_viewer.py', call)
-# link.write(3)
-# link.write(10)
+# link = new Link('/usr/local/bin/emigrate', call)
+# link.write('open /Users/lewis/Documents/github/emigrate/example_1.hdf5')
+# link.write('frame 10')
 #
 # exporter.link = link

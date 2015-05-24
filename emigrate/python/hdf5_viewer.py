@@ -22,5 +22,5 @@ class FileViewer(object):
             sys.stdout.flush()
 
 if __name__ == '__main__':
-    file = '/Users/lewis/Documents/github/emigrate/test.hdf5'
+    file = '/Users/lewis/Documents/github/emigrate/example_2.hdf5'
     FileViewer(file)
