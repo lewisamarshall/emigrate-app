@@ -1,8 +1,14 @@
 exporter=this
+
+# File dialog components
 remote = require 'remote'
 dialog = remote.require 'dialog'
+
+# Chart Components
 d3 = require '../bower_components/d3/d3.js'
 c3 = require '../bower_components/c3/c3.js'
+
+# Custom Classes
 Slider = require('./slider.js').Slider
 Link = require('./link.js').Link
 chart_properties = require('./chart_properties')

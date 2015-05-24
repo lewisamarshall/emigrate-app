@@ -55,5 +55,5 @@ exporter.properties_chart_properties.axis = {
     label: 'Properties'
     tick:
       count: 5
-      format: (d)-> d3.round(d)
+      format: (d)-> d3.round(d, 2)
   }

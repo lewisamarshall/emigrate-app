@@ -15,8 +15,18 @@ class Slider
   domain: null
 
   constructor: (domain, @brush_event)->
+    @width = parseInt(d3.select('#sliderbox').style('width'), 10)
+    @width = @width - @margin.left - @margin.right
     @domain = domain
     @make_slider(domain)
+    # d3.select(window).on('resize', @resize)
+
+  resize: =>
+      @width = parseInt(d3.select('#sliderbox').style('width'), 10)
+      @width = @width - @margin.left - @margin.right
+      @x_scale.range([0, @width])
+    #   @svg.attr("width", @width + @margin.left + @margin.right)
+      d3.select("#sliderbox").select("svg").attr("width", @width + @marg.left + @margin.right)
 
   make_slider: (domain)->
     @x_scale = d3.scale.linear()
@@ -27,7 +37,6 @@ class Slider
     @brush = d3.svg.brush()
       .x(@x_scale)
       .extent([0, 0])
-
 
     @svg = d3.select("#sliderbox").append("svg")
       .attr("width", @width + @margin.left + @margin.right)
