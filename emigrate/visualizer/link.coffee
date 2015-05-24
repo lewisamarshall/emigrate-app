@@ -28,11 +28,6 @@ class Link
     msg = msg+'\n'
     @process.stdin.write(msg)
 
-  outlet: (json_data)=>
-    data = JSON.parse(json_data)
-    @caller.call(window,'hi')
-    @caller(json_data)
-
 exporter.Link = Link
 # #
 # call = (d)=>console.log(d)
