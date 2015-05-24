@@ -25,7 +25,7 @@ class Player
   slider: null
 
   constructor: () ->
-    @link = new Link('emigrate', @draw)
+    @link = new Link('/usr/local/bin/emigrate', @draw)
 
     @concentration_chart = c3.generate(concentration_chart_properties)
 
