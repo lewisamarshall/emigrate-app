@@ -39,7 +39,7 @@ exporter.concentration_chart_properties.axis = {
     label: 'Concentration'
     tick:
       count: 5
-      format: (d)-> d3.round(d*1000)+' mM'
+      format: (d)-> d3.round(d*1000, 1)+' mM'
   }
 
 exporter.properties_chart_properties = Object.create(chart_properties)
