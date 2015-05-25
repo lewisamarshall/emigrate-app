@@ -64,10 +64,18 @@ div.tree {
 div.sidebar {
   float: left;
   clear: both;
-  width: 20%;
   background-color: #8d9f87;
-  height: 500px;
+  height: 1000px;
 }
 div.sidebar button {
   margin: auto;
+}
+div.pane_container {
+  display: inline-block;
+  margin: 10px  50px 50px 50px;
+}
+div.constructor_pane {
+  display: none;
+  padding: 10px 50px 50px 50px;
+  clear: both;
 }

@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
 
     <!-- Load Scripts -->
     <script type="text/javascript" src="../enable_dev_tools.js"></script>
-    <script src="../bower_components/jquery/dist/jquery.js"></script>
-    <script src="../bower_components/jqtree/tree.jquery.js"></script>
+    <!-- <script src="../bower_components/jquery/dist/jquery.js"></script>
+    <script src="../bower_components/jqtree/tree.jquery.js"></script> -->
 
     <!-- Load CSS -->
     <link type="text/css" href="../css/styles.css" rel="stylesheet">
-    <link rel="stylesheet" href="../bower_components/jqtree/jqtree.css">
+    <!-- <link rel="stylesheet" href="../bower_components/jqtree/jqtree.css"> -->
 
     <title>Emigrate Constructor</title>
 
@@ -27,18 +27,81 @@
     </nav>
 
     <div class="sidebar">
-        <p><button>Channel </button></p>
-        <p><button>Solutions</button></p>
-        <p><button>Field and flow</button></p>
+        <p><button onclick=my_constructor.showonly('numerics')>Edit Numerics</button></p>
+        <p><button onclick=my_constructor.showonly('fields')>Edit Fields</button></p>
+        <p><button onclick=my_constructor.showonly('solutions')>Edit Solutions</button></p>
+        <p><button onclick=my_constructor.showall()>Show All Panes</button></p>
+        <p><button onclick=my_constructor.start()>Start Simulation</button></p>
     </div>
-    <p>
-        <form>
-            <input type="search" placeholder="ion"></input>
-            <input type="number" placeholder="concentration (mM)"></input>
-            <input type="submit" value="add"></input>
-        </form>
-    </p>
 
+    <div class='pane_container'>
+        <div class='constructor_pane' id='numerics'>
+            <table><thead><h3>Numerics</h3></thead>
+                <tr><td>Flux Scheme</td>
+                    <td><select>
+                        <option value="SLIP">SLIP</option>
+                        <option value="Compact Adaptive Grid">Compact</option>
+                    </select></td>
+                </tr>
+                <tr><td>Equilibration Mode</td>
+                    <td><select>
+                        <option value="pH">pH</option>
+                        <option value="constant">Constant</option>
+                        <option value="ionic strength">Ionic Strength</option>
+                    </select></td>
+                </tr>
+                <tr><td>Grid Points</td>
+                    <td><input type="number" placeholder="100"></input></td>
+                </tr>
+                <tr><td>Precondition</td>
+                    <td><input type="checkbox" name="precondition" value="precondition"></input></td>
+                </tr>
+            </table>
+        </div>
+
+        <div class='constructor_pane' id='fields'>
+            <table><thead><h3>Fields</h3></thead>
+                <tr><td>Field Mode</td>
+                    <td><select>
+                        <option value="Voltage">Voltage</option>
+                        <option value="Current">Current</option>
+                    </select></td>
+                </tr>
+                <tr><td>Voltage (V)</td>
+                    <td><input type="number" placeholder="100"></input></td>
+                </tr>
+                <tr><td>Current (Amps)</td>
+                    <td><input type="number" placeholder="100"></input></td>
+                </tr>
+                <tr><td>Simulation Time (s)</td>
+                    <td><input type="number" placeholder="100"></input></td>
+                </tr>
+                <tr><td>Timestep (s)</td>
+                    <td><input type="number" placeholder="1"></input></td>
+                </tr>
+            </table>
+        </div>
+
+        <div class='constructor_pane' id='solutions'>
+            <table><thead><h3>Solutions</h3></thead>
+                <tr><td>Add Ion:</td>
+                    <td><input type="search" placeholder="ion"></input></td>
+                    <td><input type="number" placeholder="concentration (mM)"></input></td>
+                    <td><input type="submit" value="add"></input></td>
+                    </select></td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+    <script src='constructor.js'></script>
+
+    <div class="progress">
+        <div class="progress-bar progress-bar-striped active" role="progressbar"
+        aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:40%">
+        40%
+    </div>
+</div>
 </body>
 
 </html>
