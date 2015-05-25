@@ -1,29 +1,3 @@
-body {
-  font: 12px Arial;
-  background: #effaf4;
-}
-nav ul {
-  margin: 0;
-  padding: 5px;
-  cellspacing: 0;
-  cellpadding: 0;
-  border: 0;
-  list-style-type: none;
-  background-color: #7b435b;
-}
-nav ul li {
-  display: inline;
-}
-nav ul li a {
-  text-decoration: none;
-  padding: .2em 1em;
-  color: white;
-  background-color: #7b435b;
-}
-nav ul li a:hover {
-  color: #0EC6D7;
-  background-color: #7b435b;
-}
 .slider {
   margin-top: 0.5cm;
   margin-bottom: 1cm;
@@ -66,9 +40,6 @@ div.sidebar {
   clear: both;
   background-color: #8d9f87;
   height: 1000px;
-}
-div.sidebar button {
-  margin: auto;
 }
 div.pane_container {
   display: inline-block;

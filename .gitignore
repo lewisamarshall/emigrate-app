@@ -1,4 +1,5 @@
 emigrate/bower_components
+emigrate/bootstrap
 dist
 *.js
 *.json
