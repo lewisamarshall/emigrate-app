@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     <!-- Load Scripts -->
-    <script type="text/javascript" src="../bower_components/d3/d3.min.js"></script>
-    <script type="text/javascript" src="../bower_components/c3/c3.min.js"></script>
-    <script type="text/javascript" src="../bower_components/d3.slider/d3.slider.js"></script>
-    <script type="text/javascript" src="../enable_dev_tools.js"></script>
+    <script src="../enable_dev_tools.js"></script>
+    <script>
+    window.$ = window.jQuery = require('../bower_components/jquery/dist/jquery.js');
+    </script>
+    <script src="../bootstrap3/js/bootstrap.min.js"></script>
+    <script src="../bower_components/d3/d3.min.js"></script>
+    <script src="../bower_components/c3/c3.min.js"></script>
+    <script src="../bower_components/d3.slider/d3.slider.js"></script>
 
     <!-- Load CSS -->
+    <link href="../bootstrap3/css/bootstrap.min.css" rel="stylesheet" media='screen'>
     <link type="text/css" href="../bower_components/c3/c3.css" rel="stylesheet">
     <link type="text/css" href="../bower_components/d3.slider/d3.slider.css" rel="stylesheet">
     <link type="text/css" href="../css/styles.css" rel="stylesheet">
@@ -19,16 +23,16 @@
 
 <body>
     <nav>
-      <ul>
+      <ul class='nav nav-tabs'>
         <li><a href="../index.html">Home</a></li>
-        <li><a href="./index.html">Visualizer</a></li>
+        <li class="active"><a href="#">Visualizer</a></li>
         <li><a href="../constructor/index.html">Constructor</a></li>
         <li><a href="../help/index.html">Help</a></li>
       </ul>
     </nav>
 
     <p>
-        <button onclick=player.open_file()>Open</button>
+        <button class='btn' onclick=player.open_file()>Open</button>
     </p>
 
     <div id="concentration_chart" class='chart'></div>

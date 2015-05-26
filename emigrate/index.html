@@ -8,11 +8,10 @@
     <script>
     window.$ = window.jQuery = require('bower_components/jquery/dist/jquery.js');
     </script>
-    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
     <!-- Load CSS -->
     <!-- <link type="text/css" href="css/styles.css" rel="stylesheet"> -->
-    <link href="./bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="./bootstrap3/css/bootstrap.min.css" rel="stylesheet" media="screen">
 </head>
 
 <body>
@@ -24,26 +23,28 @@
         <li><a href="help/index.html">Help</a></li>
       </ul>
     </nav>
+    <div class="container">
+        <h1>Welcome to Emigrate!</h1>
+        <p>
+           Emigrate is a full electrophoresis simulation tool written in Python.
+           It uses Numpy for fast linear algebra, and employs the techniques of
+           SPRESSO, Steep, and other high-power electrophoresis simulators.
+        </p>
 
-    <h1>Welcome to Emigrate!</h1>
-    <p>
-       Emigrate is a full electrophoresis simulation tool written in Python.
-       It uses Numpy for fast linear algebra, and employs the techniques of
-       SPRESSO, Steep, and other high-power electrophoresis simulators.
-    </p>
+        <p>
+           We are using io.js <script>document.write(process.version)</script>and Electron
+           <script>document.write(process.versions['electron'])</script>.
+        </p>
 
-    <p>
-       We are using io.js <script>document.write(process.version)</script>and Electron
-       <script>document.write(process.versions['electron'])</script>.
-    </p>
+        <ol>
+           <li>Adjust colors.</li>
+           <li>Add forms for constructing.</li>
+           <li>Fix navigation bar</li>
+           <li>Create universal link.</li>
+           <li>Integrated menu bar</li>
+        </ol>
+    </div>
 
-    <ol>
-       <li>Adjust colors.</li>
-       <li>Add forms for constructing.</li>
-       <li>Fix navigation bar</li>
-       <li>Create universal link.</li>
-       <li>Integrated menu bar</li>
-    </ol>
 </body>
 
 </html>
