@@ -14,6 +14,7 @@ Link = require('./link.js').Link
 chart_properties = require('./chart_properties')
 concentration_chart_properties = chart_properties.concentration_chart_properties
 properties_chart_properties = chart_properties.properties_chart_properties
+throttle = require('./throttle').throttle
 
 class Player
 
@@ -52,7 +53,7 @@ class Player
     # If this is the first callback, create the slider
     if not @slider
       @frames = data.n_electrolytes
-      @slider = new Slider(@frames, @go_to_frame)
+      @slider = new Slider(@frames, throttle(@go_to_frame, 100))
 
     @concentration_chart.load(json:data.concentrations)
     @properties_chart.load(json:data.properties)

@@ -18,7 +18,7 @@ app.on('ready', ()->
   mainWindow = new BrowserWindow({width: 1000, height: 800})
 
   # and load the index.html of the app.
-  mainWindow.loadUrl('file://' + __dirname + '/visualizer/index.html')
+  mainWindow.loadUrl('file://' + __dirname + '/index.html')
 
 
   # Emitted when the window is closed.

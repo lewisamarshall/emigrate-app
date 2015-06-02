@@ -22,18 +22,18 @@
 </head>
 
 <body>
+    <div class="container">
     <nav>
       <ul class='nav nav-tabs'>
         <li><a href="../index.html">Home</a></li>
         <li class="active"><a href="#">Visualizer</a></li>
         <li><a href="../constructor/index.html">Constructor</a></li>
         <li><a href="../help/index.html">Help</a></li>
+        <li class='pull-right'> <button class='btn btn-primary navbar-btn' onclick=player.open_file()>Open</button>
+        </li>
       </ul>
     </nav>
 
-    <p>
-        <button class='btn' onclick=player.open_file()>Open</button>
-    </p>
 
     <div id="concentration_chart" class='chart'></div>
     <div id="property_chart" class='chart'></div>
@@ -49,6 +49,7 @@
     <!-- <p><button onclick=next()>Next</button></p>
     <p><button onclick=prev()>Previous</button></p>
     <p><button onclick=play()>Play</button></p> -->
+    </div>
 
 </body>
 
