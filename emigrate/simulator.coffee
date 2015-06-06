@@ -1,6 +1,6 @@
 exporter = this
 
-Link = require('../visualizer/link').Link
+Link = require('./helpers/link').Link
 
 
 class Constructor

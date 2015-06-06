@@ -5,16 +5,16 @@ remote = require 'remote'
 dialog = remote.require 'dialog'
 
 # Chart Components
-d3 = require 'bower_components/d3/d3.js'
-c3 = require 'bower_components/c3/c3.js'
+d3 = require './bower_components/d3/d3.js'
+c3 = require './bower_components/c3/c3.js'
 
 # Custom Classes
-Slider = require('./visualizer/slider.js').Slider
-Link = require('./visualizer/link.js').Link
-chart_properties = require('./visualizer/chart_properties')
+Slider = require('./slider.js').Slider
+Link = require('./helpers/link.js').Link
+chart_properties = require('./chart_properties')
 concentration_chart_properties = chart_properties.concentration_chart_properties
 properties_chart_properties = chart_properties.properties_chart_properties
-throttle = require('./visualizer/throttle').throttle
+throttle = require('./helpers/throttle').throttle
 # console.log(throttle)
 
 class Player

@@ -1,5 +1,5 @@
 exporter = this
-d3 = require '../bower_components/d3/d3.js'
+d3 = require './bower_components/d3/d3.js'
 
 class Slider
   margin: {top: 10, right: 50, bottom: 10, left: 50}

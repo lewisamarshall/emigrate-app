@@ -11,11 +11,21 @@ mainWindow = null
 # Quit when all windows are closed.
 app.on('window-all-closed', ()->app.quit())
 
+# Import menu template
+Menu = require('menu')
+# template = require('./menu-template').template
+# menu = Menu.buildFromTemplate(template)
+
+
 # This method will be called when Electron has done everything
 # initialization and ready for creating browser windows.
 app.on('ready', ()->
   #  Create the browser window.
-  mainWindow = new BrowserWindow({width: 1000, height: 800})
+  # mainWindow = new BrowserWindow({width: 1000, height: 800})
+  mainWindow = new BrowserWindow({fullscreen: true})
+
+  # Add the menu
+  # Menu.setApplicationMenu(menu)
 
   # and load the index.html of the app.
   mainWindow.loadUrl('file://' + __dirname + '/index.html')
