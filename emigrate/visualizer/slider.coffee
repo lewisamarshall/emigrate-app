@@ -21,6 +21,11 @@ class Slider
     @make_slider(domain)
     # d3.select(window).on('resize', @resize)
 
+  remove: =>
+    @svg.remove()
+    parent = document.getElementById("sliderbox")
+    parent.removeChild(parent.firstChild)
+
   resize: =>
       @width = parseInt(d3.select('#sliderbox').style('width'), 10)
       @width = @width - @margin.left - @margin.right

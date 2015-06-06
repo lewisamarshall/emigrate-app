@@ -5,16 +5,17 @@ remote = require 'remote'
 dialog = remote.require 'dialog'
 
 # Chart Components
-d3 = require '../bower_components/d3/d3.js'
-c3 = require '../bower_components/c3/c3.js'
+d3 = require 'bower_components/d3/d3.js'
+c3 = require 'bower_components/c3/c3.js'
 
 # Custom Classes
-Slider = require('./slider.js').Slider
-Link = require('./link.js').Link
-chart_properties = require('./chart_properties')
+Slider = require('./visualizer/slider.js').Slider
+Link = require('./visualizer/link.js').Link
+chart_properties = require('./visualizer/chart_properties')
 concentration_chart_properties = chart_properties.concentration_chart_properties
 properties_chart_properties = chart_properties.properties_chart_properties
-throttle = require('./throttle').throttle
+throttle = require('./visualizer/throttle').throttle
+# console.log(throttle)
 
 class Player
 
@@ -39,6 +40,7 @@ class Player
     @properties_chart = c3.generate(properties_chart_properties)
 
   open_file: =>
+    @close()
     @frame = 0
     file = dialog.showOpenDialog(
       properties: ['openFile']
@@ -48,12 +50,20 @@ class Player
     @link.write('open '+file)
     @link.write('frame '+@frame)
 
+  close: =>
+    @concentration_chart.unload()
+    @properties_chart.unload()
+    @slider?.remove()
+    @slider = null
+
   draw: (data) =>
     """Callback function to draw new frame data."""
     # If this is the first callback, create the slider
     if not @slider
       @frames = data.n_electrolytes
       @slider = new Slider(@frames, throttle(@go_to_frame, 100))
+      # @slider = new Slider(@frames, @go_to_frame)
+
 
     @concentration_chart.load(json:data.concentrations)
     @properties_chart.load(json:data.properties)

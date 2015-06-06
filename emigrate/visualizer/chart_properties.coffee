@@ -17,7 +17,7 @@ chart_properties ={
     x: 30
     y: 0
   transition:
-    duration: 10
+    duration: 0
   point:
     show: true
     r: 1.5
@@ -32,12 +32,17 @@ exporter.concentration_chart_properties.axis = {
   x:
     label: 'Length'
     tick:
-      fit: true
-      count: 5
+      fit: false
+      culling:
+        max: 5
+      count: 10
       format: (d)->d3.round(d*1000, 1)+' mm'
   y:
     label: 'Concentration'
     tick:
+      fit: false
+      culling:
+        max: 5
       count: 5
       format: (d)-> d3.round(d*1000, 1)+' mM'
   }
