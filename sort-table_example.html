@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+	<script src="./emigrate/bower_components/webcomponentsjs/webcomponents.min.js"></script>
+	<link rel="import" href="./emigrate/bower_components/sortable-table/sortable-table.html">
+	<link rel="stylesheet" href="./emigrate/bower_components/sortable-table/css/bootstrap.css" shim-shadowdom>
+</head>
+
+<body>
+
+	<template id="example" bind>
+		<sortable-table class="bootstrap" data="{{data}}" columns="{{columns}}">
+			<!-- nested table as a cell -->
+			<template id="nestedTable">
+				<td style="padding:0;">
+					<sortable-table class="bootstrap" style="width:100%" data="{{row[column.name]}}" columns="{{column.columns}}" sortColumn="{{column.sortColumn}}" sortDescending="{{column.sortDescending}}">
+					</sortable-table>
+				</td>
+			</template>
+		</sortable-table>
+	</template>
+
+	<script>
+	var electrolyte = [
+		{
+			zone: 'Trailing Electrolyte',
+			length: 1,
+			solutions : [
+				{ ion: 'tris', concentration: 0.1},
+				{ ion: 'caproic acid', concentration: 0.2},
+				{ ion: 'hepes', concentration: 0.2},
+			]
+		},{
+			zone: 'Sample',
+			length: 1,
+			solutions : [
+				{ ion: 'alexa fluor 488', concentration: 0.001},
+				{ ion: 'tris', concentration: 0.02},
+				{ ion: 'hydrochloric acid', concentration: 0.01},
+			]
+		},{
+			zone: 'Leading Electrolyte',
+			length: 1,
+			solutions : [
+				{ ion: 'hydrochloric acid', concentration: 0.1},
+				{ ion: 'tris', concentration: 0.2},
+			]
+		}
+	];
+
+	var columns = [
+		{
+			name: 'zone',
+			title: 'Zone'
+		},{
+			name: 'length',
+			title: 'Length'
+		},{
+			name:'solutions',
+			title:'Solution',
+			cellTemplate: 'nestedTable',
+			columns: [
+				{ name:'ion', title:'Ion'},
+				{ name:'concentration', title: 'Concentration'},
+			],
+		}
+	];
+
+
+	window.addEventListener('polymer-ready', function(){
+		var model = {
+			data: electrolyte,
+			columns: columns
+		};
+		document.getElementById('example').model = model;
+		electrolyte[0].name='TE'
+		electrolyte[1].name='Sampsonite'
+	});
+	</script>
+</body>
+</html>

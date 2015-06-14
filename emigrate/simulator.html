@@ -1,116 +1,157 @@
 <div id='sim-content'>
-        <div class='panel-group col-md-6' id="option-container"
-            role="tablist" aria-multiselectable="true">
+  <!-- Configuration Panels -->
+  <div class='panel-group col-md-6' id="option-container" role="tablist" aria-multiselectable="true">
 
-            <div class="panel panel-default">
-                <div class='panel-heading' role="tab" id="headingNumerics">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#option-container"
-                           href="#numerics_collapse" aria-expanded="true"
-                           aria-controls="numerics_collapse">
+    <div class="panel panel-default">
+      <div class='panel-heading' role="tab" id="headingNumerics">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#option-container" href="#numerics_collapse" aria-expanded="true" aria-controls="numerics_collapse">
                             Numerics
                         </a>
-                    </h4>
-                </div>
-                <div id="numerics_collapse" class="panel-body collapse in">
-                    <div class="panel-body">
-                        <table class='table table-condensed'>
-                            <tr><td>Flux Scheme</td>
-                                <td><select>
-                                    <option value="SLIP">SLIP</option>
-                                    <option value="Compact Adaptive Grid">Compact</option>
-                                </select></td>
-                            </tr>
-                            <tr><td>Equilibration Mode</td>
-                                <td><select>
-                                    <option value="pH">pH</option>
-                                    <option value="constant">Constant</option>
-                                    <option value="ionic strength">Ionic Strength</option>
-                                </select></td>
-                            </tr>
-                            <tr><td>Grid Points</td>
-                                <td><input type="number" placeholder="100"></input></td>
-                            </tr>
-                            <tr><td>Precondition</td>
-                                <td><input type="checkbox" name="precondition" value="precondition"></input></td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
+        </h4>
+      </div>
+      <div id="numerics_collapse" class="panel-body collapse in">
+        <div class="panel-body">
+          <table class='table table-condensed'>
+            <tr>
+              <td>Flux Scheme</td>
+              <td>
+                <select>
+                  <option value="SLIP">SLIP</option>
+                  <option value="Compact Adaptive Grid">Compact</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td>Equilibration Mode</td>
+              <td>
+                <select>
+                  <option value="pH">pH</option>
+                  <option value="constant">Constant</option>
+                  <option value="ionic strength">Ionic Strength</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td>Grid Points</td>
+              <td>
+                <input type="number" placeholder="100"></input>
+              </td>
+            </tr>
+            <tr>
+              <td>Precondition</td>
+              <td>
+                <input type="checkbox" name="precondition" value="precondition"></input>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
 
-            </div>
+    </div>
 
-            <div class="panel panel-default">
-                <div class='panel-heading' role="tab" id="headingFields">
-                    <h4 class="panel-title">
-                        <a class='collapsed' data-toggle="collapse" data-parent="#option-container"
-                           href="#fields_collapse" aria-expanded="false"
-                           aria-controls="fields_collapse">
+    <div class="panel panel-default">
+      <div class='panel-heading' role="tab" id="headingFields">
+        <h4 class="panel-title">
+          <a class='collapsed' data-toggle="collapse" data-parent="#option-container" href="#fields_collapse" aria-expanded="false" aria-controls="fields_collapse">
                             Fields
                         </a>
-                    </h4>
-                </div>
-                <div id="fields_collapse" class="panel-body collapse in">
-                    <div class="panel-body">
-                        <table class='table table-condensed'><thead>
-                            <tr><td>Field Mode</td>
-                                <td><select>
-                                    <option value="Voltage">Voltage</option>
-                                    <option value="Current">Current</option>
-                                </select></td>
-                            </tr>
-                            <tr><td>Voltage (V)</td>
-                                <td><input type="number" placeholder="100"></input></td>
-                            </tr>
-                            <tr><td>Current (Amps)</td>
-                                <td><input type="number" placeholder="100"></input></td>
-                            </tr>
-                            <tr><td>Simulation Time (s)</td>
-                                <td><input type="number" placeholder="100"></input></td>
-                            </tr>
-                            <tr><td>Timestep (s)</td>
-                                <td><input type="number" placeholder="1"></input></td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
+        </h4>
+      </div>
+      <div id="fields_collapse" class="panel-body collapse in">
+        <div class="panel-body">
+          <table class='table table-condensed'>
+            <thead>
+              <tr>
+                <td>Field Mode</td>
+                <td>
+                  <select>
+                    <option value="Voltage">Voltage</option>
+                    <option value="Current">Current</option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td>Voltage (V)</td>
+                <td>
+                  <input type="number" placeholder="100"></input>
+                </td>
+              </tr>
+              <tr>
+                <td>Current (Amps)</td>
+                <td>
+                  <input type="number" placeholder="100"></input>
+                </td>
+              </tr>
+              <tr>
+                <td>Simulation Time (s)</td>
+                <td>
+                  <input type="number" placeholder="100"></input>
+                </td>
+              </tr>
+              <tr>
+                <td>Timestep (s)</td>
+                <td>
+                  <input type="number" placeholder="1"></input>
+                </td>
+              </tr>
+          </table>
+        </div>
+      </div>
 
-            </div>
+    </div>
 
-            <div class="panel panel-default">
-                <div class='panel-heading' role="tab" id="headingSolutions">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#option-container"
-                           href="#solutions_collapse" aria-expanded="false"
-                           aria-controls="solutions_collapse">
+    <div class="panel panel-default">
+      <div class='panel-heading' role="tab" id="headingSolutions">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#option-container" href="#solutions_collapse" aria-expanded="false" aria-controls="solutions_collapse">
                             Solutions
                         </a>
-                    </h4>
-                </div>
-                <div id="solutions_collapse" class="panel-body collapse in">
-                    <div class="panel-body">
-                        <table class='table table-condensed'>
-                            <tr><td>Add Ion:</td>
-                                <td><input type="search" class='input-medium search-query', placeholder="ion"></input></td>
-                                <td><input type="number" placeholder="concentration (mM)"></input></td>
-                                <td><input class='btn' type="submit" value="add"></input></td>
-                                </select></td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-
-            </div>
-
+        </h4>
+      </div>
+      <div id="solutions_collapse" class="panel-body collapse in">
+        <div class="panel-body">
+          <table class='table table-condensed'>
+            <tr>
+              <td>Add Ion:</td>
+              <td>
+                <input type="search" class='input-medium search-query' , placeholder="ion"></input>
+              </td>
+              <td>
+                <input type="number" placeholder="concentration (mM)"></input>
+              </td>
+              <td>
+                <input class='btn' type="submit" value="add"></input>
+              </td>
+              </select>
+              </td>
+            </tr>
+          </table>
         </div>
+      </div>
 
-        <footer class='panel col-md-12'>
-            <div class="progress">
-                <div class="progress-bar progress-bar-striped active" role="progressbar"
-                aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:50%">
-                50%
-                </div>
-            </div>
-        </footer>
     </div>
-    <script src='constructor.js'></script>
+
+  </div>
+
+  <!-- Configuration Panels -->
+  <div class='panel-group col-md-6' id="option-container" role="tablist" aria-multiselectable="true">
+    <div id="simulation_chart" class='chart'></div>
+    <table class="table table-striped" id="sim-table">
+      <tr>
+        <th>Ion</th>
+        <th>Concentration (mM)</th>
+      </tr>
+    </table>
+
+  </div>
+
+  <footer class='footer'>
+    <div class="progress">
+      <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:50%">
+        50%
+      </div>
+    </div>
+  </footer>
+</div>
+<!-- <script src='simulator.js'></script> -->

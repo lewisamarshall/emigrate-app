@@ -15,7 +15,6 @@ chart_properties = require('./chart_properties')
 concentration_chart_properties = chart_properties.concentration_chart_properties
 properties_chart_properties = chart_properties.properties_chart_properties
 throttle = require('./helpers/throttle').throttle
-# console.log(throttle)
 
 class Player
 

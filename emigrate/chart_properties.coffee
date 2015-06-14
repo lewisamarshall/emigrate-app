@@ -62,3 +62,28 @@ exporter.properties_chart_properties.axis = {
       count: 5
       format: (d)-> d3.round(d, 2)
   }
+
+exporter.simulation_chart_properties = Object.create(chart_properties)
+exporter.simulation_chart_properties.bindto = '#simulation_chart'
+exporter.simulation_chart_properties.axis = {
+  x:
+    label: 'Length'
+    tick:
+      fit: true
+      count: 5
+      format: (d)->d3.round(d*1000, 1)+' mm'
+  y:
+    label: 'Concentration'
+    tick:
+      fit: false
+      culling:
+        max: 5
+      count: 5
+      format: (d)-> d3.round(d*1000, 1)+' mM'
+  }
+exporter.simulation_chart_properties.padding = {
+  top: 0
+  right: 50
+  bottom: 0
+  left: 50
+}
