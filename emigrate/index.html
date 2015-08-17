@@ -12,11 +12,14 @@
   <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
   <script src="bower_components/d3/d3.min.js"></script>
   <script src="bower_components/c3/c3.min.js"></script>
+  <script src="bower_components/webcomponentsjs/webcomponents.min.js"></script>
 
   <!-- Load CSS -->
   <link href="styles/styles.css" rel="stylesheet">
   <link href="bower_components/c3/c3.css" rel="stylesheet">
   <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
+  <link rel="import" href="bower_components/sortable-table/sortable-table.html">
+  <link rel="stylesheet" href="bower_components/sortable-table/css/bootstrap.css" shim-shadowdom>
 
 </head>
 
@@ -28,10 +31,13 @@
           <a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a>
         </li>
         <li role="presentation">
-          <a href="#viz" aria-controls="viz" role="tab" data-toggle="tab">Visualize</a>
+          <a href="#con" aria-controls="viz" role="tab" data-toggle="tab">Construct</a>
         </li>
         <li role="presentation">
           <a href="#sim" aria-controls="sim" role="tab" data-toggle="tab">Simulate</a>
+        </li>
+        <li role="presentation">
+          <a href="#viz" aria-controls="sim" role="tab" data-toggle="tab">Visualize</a>
         </li>
       </ul>
 
@@ -45,15 +51,15 @@
             scr.parentNode.insertBefore(el.cloneNode(true), scr);
           </script>
         </div>
-        <div role="tabpanel" class="tab-pane fade" id="viz">
-          <link rel="import" href="./player.html" id="player-content-link">
-          <script id='player-content-script'>
-            var content = document.getElementById('player-content-link').import;
-            var el = content.getElementById('player-content');
-            var scr = document.getElementById('player-content-script');
+        <div role="tabpanel" class="tab-pane fade" id="con">
+          <link rel="import" href="./constructor.html" id="constructor-content-link">
+          <script id='constructor-content-script'>
+            var content = document.getElementById('constructor-content-link').import;
+            var el = content.getElementById('constructor-content');
+            var scr = document.getElementById('constructor-content-script');
             scr.parentNode.insertBefore(el.cloneNode(true), scr);
           </script>
-          <script src="./player.js"></script>
+          <script src="./constructor.js"></script>
         </div>
         <div role="tabpanel" class="tab-pane fade" id="sim">
           <link rel="import" href="./simulator.html" id="sim-content-link">
@@ -64,6 +70,16 @@
             scr.parentNode.insertBefore(el.cloneNode(true), scr);
           </script>
           <script src='./simulator.js'></script>
+        </div>
+        <div role="tabpanel" class="tab-pane fade" id="viz">
+          <link rel="import" href="./player.html" id="player-content-link">
+          <script id='player-content-script'>
+            var content = document.getElementById('player-content-link').import;
+            var el = content.getElementById('player-content');
+            var scr = document.getElementById('player-content-script');
+            scr.parentNode.insertBefore(el.cloneNode(true), scr);
+          </script>
+          <script src="./player.js"></script>
         </div>
       </div>
     </div>

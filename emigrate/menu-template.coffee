@@ -50,7 +50,9 @@ template = [
       {
         label: 'Open',
         accelerator: 'Command+O',
-        click: -> BrowserWindow.getFocusedWindow().player.open_file()
+        click: ->
+          window = BrowserWindow.getFocusedWindow()
+          window.player.open_file()
       }
     ]
 

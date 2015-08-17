@@ -87,3 +87,28 @@ exporter.simulation_chart_properties.padding = {
   bottom: 0
   left: 50
 }
+
+exporter.constructor_chart_properties = Object.create(chart_properties)
+exporter.constructor_chart_properties.bindto = '#constructor_chart'
+exporter.constructor_chart_properties.axis = {
+  x:
+    label: 'Length'
+    tick:
+      fit: true
+      count: 5
+      format: (d)->d3.round(d*1000, 1)+' mm'
+  y:
+    label: 'Concentration'
+    tick:
+      fit: false
+      culling:
+        max: 5
+      count: 5
+      format: (d)-> d3.round(d*1000, 1)+' mM'
+  }
+exporter.constructor_chart_properties.padding = {
+  top: 0
+  right: 50
+  bottom: 0
+  left: 50
+}
