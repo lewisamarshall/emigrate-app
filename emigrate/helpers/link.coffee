@@ -9,8 +9,8 @@ class Link
   reader: null
   err_reader: null
 
-  constructor: (process, callback)->
-    @process = spawn(process)
+  constructor: (process, args, callback)->
+    @process = spawn(process, args)
 
     # Call the callback through the outlet for each returned item.
     @reader = readline.createInterface(input: @process.stdout)

@@ -32,13 +32,11 @@ class Player
   slider: null
 
   constructor: () ->
-    @link = new Link('/usr/local/bin/emigrate', @draw)
-
     @concentration_chart = c3.generate(concentration_chart_properties)
-
     @properties_chart = c3.generate(properties_chart_properties)
 
   open_file: =>
+    @link?.kill()
     @close()
     @frame = 0
     file = dialog.showOpenDialog(
@@ -46,10 +44,12 @@ class Player
       filters: [{name: 'JSON', extensions: ['json']},
         {name: 'HDF5', extensions: ['hdf5']}]
     )[0]
-    @link.write('open '+file)
-    @link.write('frame '+@frame)
+    console.log(['open', file, '--io'])
+    @link = new Link('emigrate', ['load', '--io', file], @draw)
+    @link.write(@frame)
 
   close: =>
+    @link?.kill()
     @concentration_chart.unload()
     @properties_chart.unload()
     @slider?.remove()
@@ -59,19 +59,24 @@ class Player
     """Callback function to draw new frame data."""
     # If this is the first callback, create the slider
     if not @slider
-      @frames = data.n_electrolytes
+      # TODO: Get slider info.
+      @frames = 100
       @slider = new Slider(@frames, throttle(@go_to_frame, 100))
       # @slider = new Slider(@frames, @go_to_frame)
 
+    concentrations = {'x': data.nodes.data}
+    concentrations[data.ions[i]] = c for c, i in data.concentrations.data
+    properties = {'x': data.nodes.data}
+    properties[key] = data[key].data for key in ['pH', 'field']
 
-    @concentration_chart.load(json:data.concentrations)
-    @properties_chart.load(json:data.properties)
+    @concentration_chart.load(json:concentrations)
+    @properties_chart.load(json:properties)
     d3.select('#sliderframe').text(@frame)
     # d3.select('#slidertime').text(exporter.time[frame]+' s')
 
   go_to_frame: (frame) =>
     if (frame != @frame)
       @frame = frame
-      @link.write('frame ' + @frame)
+      @link.write(@frame)
 
 exporter.player = new Player
