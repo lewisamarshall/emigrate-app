@@ -13,8 +13,8 @@ app.on('window-all-closed', ()->app.quit())
 
 # Import menu template
 Menu = require('menu')
-# template = require('./menu-template').template
-# menu = Menu.buildFromTemplate(template)
+template = require('./menu-template').template
+menu = Menu.buildFromTemplate(template)
 
 
 # This method will be called when Electron has done everything
@@ -25,7 +25,7 @@ app.on('ready', ()->
   mainWindow = new BrowserWindow({fullscreen: true})
 
   # Add the menu
-  # Menu.setApplicationMenu(menu)
+  Menu.setApplicationMenu(menu)
 
   # and load the index.html of the app.
   mainWindow.loadUrl('file://' + __dirname + '/index.html')

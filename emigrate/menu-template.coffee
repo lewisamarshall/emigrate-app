@@ -1,5 +1,6 @@
 exporter = this
 BrowserWindow = require 'browser-window'
+app = require 'app'
 
 template = [
   {
