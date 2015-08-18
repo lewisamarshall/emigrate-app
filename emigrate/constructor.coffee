@@ -66,7 +66,7 @@ class Constructor
     @constructor_chart = c3.generate(constructor_chart_properties)
     @update()
 
-  update: ()->
+  update: =>
     serial =
       solutions: (@parse_solution(zone.solution) for zone in @data)
       lengths: (zone.length for zone in @data)
@@ -84,6 +84,19 @@ class Constructor
     concentrations = {'x': data.nodes.data}
     concentrations[data.ions[i].name] = c for c, i in data.concentrations.data
     @constructor_chart.load(json:concentrations)
+
+  add_zone: =>
+    @data.push(
+      zone: '',
+      length: .005,
+      solution : [
+        { ion: 'hydrochloric acid', concentration: 0.001},
+      ]
+    )
+
+  add_ion: (n)=>
+    console.log(n)
+    @data[n].solution.push({ ion: 'hydrochloric acid', concentration: 0.001})
 
 
 exporter.constructor = new Constructor()
