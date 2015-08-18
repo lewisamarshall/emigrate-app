@@ -87,7 +87,7 @@ class Constructor
 
   add_zone: =>
     @data.push(
-      zone: '',
+      zone: 'New Zone',
       length: .005,
       solution : [
         { ion: 'hydrochloric acid', concentration: 0.001},

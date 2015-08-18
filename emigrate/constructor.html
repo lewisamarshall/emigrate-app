@@ -1,7 +1,7 @@
 <div id='constructor-content'>
-  <script>function add_ion(data){console.log('adding ion')}</script>
 
-  <button class='btn btn-primary navbar-btn' onclick=window.constructor.update()>Update</button>
+  <button class='btn btn-default navbar-btn' onclick=window.constructor.update()>Update</button>
+  <button class='btn btn-primary navbar-btn' onclick=window.constructor.save()>Save</button>
   <!-- Chart -->
   <div id="constructor_chart" class='chart'></div>
   <!-- Table -->
@@ -10,9 +10,8 @@
                     data="{{data}}"
                     columns="{{columns}}"
                     userSort=true
-                    disableColumnMove=true
+                    disableColum  nMove=true
                     rowEditorTemplate="editor"
-                    footerTemplate="footer"
                     >
       <!-- nested table as a cell -->
       <template id="nestedTable">
@@ -22,16 +21,38 @@
                           data="{{row[column.name]}}"
                           columns="{{column.columns}}"
                           disableColumnMove=true
-                          footerTemplate="nestedFooter">
+                          footerTemplate="nestedFooter"
+                          rowEditorTemplate="nestedTableEditor">
 
             <template id="nestedFooter">
               <div horizontal="" layout="" center="">
                   <button type="button"
                           class="btn btn-default"
-                          onclick="{{data | add_ion}}">
+                          value="{{data}}"
+                          >
                       Add Ion
                   </button>
               </div>
+            </template>
+
+            <template id="nestedTableEditor">
+              <td horizontal layout on-dblclick="{{closeEdit}}">
+                <div flex horizontal layout center class="form-group">
+                  <input type='text'
+                         value="{{record.row.ion}}"
+                         class="form-control"
+                         on-change="window.constructor.update()">
+                </div>
+              </td>
+              <td>
+                <div class="form-group has-success has-feedback">
+                  <input type="number"
+                         class="form-control"
+                         value="{{record.row.concentration}}"
+                         step=".001"
+                         on-change="window.constructor.update()">
+                </div>
+              </td>
             </template>
 
           </sortable-table>
@@ -69,16 +90,12 @@
           </template>
         </td>
       </template>
-      <!-- Footer -->
-      <template id="footer">
-        <div horizontal="" layout="" center="">
-            <button type="button"
-                    class="btn btn-default"
-                    onclick=window.constructor.add_zone()>
-                Add Zone
-            </button>
-        </div>
-      </template>
     </sortable-table>
   </template>
+  <button type="button"
+          class="btn btn-default"
+          onclick=window.constructor.add_zone()>
+    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+    Add Zone
+  </button>
 </div>
