@@ -44,7 +44,6 @@ class Player
       filters: [{name: 'JSON', extensions: ['json']},
         {name: 'HDF5', extensions: ['hdf5']}]
     )[0]
-    console.log(['open', file, '--io'])
     @link = new Link('emigrate', ['load', '--io', file], @draw)
     @link.write(@frame)
 
@@ -58,21 +57,24 @@ class Player
   draw: (data) =>
     """Callback function to draw new frame data."""
     # If this is the first callback, create the slider
-    if not @slider
-      # TODO: Get slider info.
-      @frames = 100
+    console.log(data)
+    if data.length?
+      @frames = data.length
       @slider = new Slider(@frames, throttle(@go_to_frame, 100))
-      # @slider = new Slider(@frames, @go_to_frame)
 
-    concentrations = {'x': data.nodes.data}
-    concentrations[data.ions[i]] = c for c, i in data.concentrations.data
-    properties = {'x': data.nodes.data}
-    properties[key] = data[key].data for key in ['pH', 'field']
+    if data.nodes?
+      concentrations = {'x': data.nodes.data}
+      concentrations[data.ions[i].name] = c for c, i in data.concentrations.data
+      properties = {'x': data.nodes.data}
+      properties[key] = data[key]?.data for key in ['pH', 'field']
 
-    @concentration_chart.load(json:concentrations)
-    @properties_chart.load(json:properties)
-    d3.select('#sliderframe').text(@frame)
-    # d3.select('#slidertime').text(exporter.time[frame]+' s')
+      @concentration_chart.load(json:concentrations)
+      @properties_chart.load(json:properties)
+      d3.select('#sliderframe').text(@frame)
+      d3.select('#slidertime').text(data.time)
+
+    if data.error?
+      console.log(data.error)
 
   go_to_frame: (frame) =>
     if (frame != @frame)
