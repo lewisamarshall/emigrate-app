@@ -1,11 +1,22 @@
 <div id='sim-content'>
+  <button class='btn btn-default navbar-btn'
+          onclick=window.simulator.load()>Load</button>
+  <button class='btn btn-default navbar-btn'
+          onclick=window.simulator.run()>Run</button>
   <!-- Configuration Panels -->
-  <div class='panel-group col-md-6' id="option-container" role="tablist" aria-multiselectable="true">
+  <div class='panel-group col-md-4'
+       id="option-container"
+       role="tablist"
+       aria-multiselectable="true">
 
     <div class="panel panel-default">
       <div class='panel-heading' role="tab" id="headingNumerics">
         <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#option-container" href="#numerics_collapse" aria-expanded="true" aria-controls="numerics_collapse">
+          <a data-toggle="collapse"
+             data-parent="#option-container"
+             href="#numerics_collapse"
+             aria-expanded="true"
+             aria-controls="numerics_collapse">
                             Numerics
                         </a>
         </h4>
@@ -101,26 +112,21 @@
 
     </div>
 
-    <div class="panel panel-default">
-      <div class='panel-heading' role="tab" id="headingSolutions">
-        <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#option-container" href="#solutions_collapse" aria-expanded="false" aria-controls="solutions_collapse">
-                            Solutions
-                        </a>
-        </h4>
-      </div>
-    </div>
-
   </div>
 
   <!-- Configuration Panels -->
-  <div class='panel-group col-md-6' id="option-container" role="tablist" aria-multiselectable="true">
+  <div class='panel-group col-md-8'
+       id="option-container"
+       role="tablist"
+       aria-multiselectable="true">
     <div id="simulation_chart" class='chart'></div>
   </div>
 
   <footer class='footer'>
     <div class="progress">
-      <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:50%">
+      <div class="progress-bar progress-bar-striped active"
+           role="progressbar" aria-valuenow="50"
+           aria-valuemin="0" aria-valuemax="100" style="width:50%">
         50%
       </div>
     </div>
