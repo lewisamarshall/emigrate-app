@@ -1,5 +1,4 @@
 exporter=this
-# d3 = require '../bower_components/d3/d3.js'
 
 chart_properties ={
   padding:

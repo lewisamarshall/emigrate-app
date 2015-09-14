@@ -57,7 +57,6 @@ class Player
   draw: (data) =>
     """Callback function to draw new frame data."""
     # If this is the first callback, create the slider
-    console.log(data)
     if data.length?
       @frames = data.length
       @slider = new Slider(@frames, throttle(@go_to_frame, 100))

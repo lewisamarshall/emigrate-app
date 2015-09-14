@@ -13,6 +13,27 @@
                     disableColum  nMove=true
                     rowEditorTemplate="editor"
                     >
+      <!-- <template id="row">
+        <td>
+          <button type="button"
+                  class="btn btn-default"
+                  onclick={{row.length}}>
+                  Remove
+          </button>
+        </td>
+        <td>
+          {{record.row.zone}}
+        </td>
+        <td>
+          {{record.row.length}}
+        </td>
+        <td>
+          <template repeat="{{ion in row.solution.ions}}" bind="">
+            <td>{{ion}}</td>
+          </template>
+        </td>
+      </template> -->
+
       <!-- nested table as a cell -->
       <template id="nestedTable">
         <td style="padding:0;">
@@ -21,40 +42,7 @@
                           data="{{row[column.name]}}"
                           columns="{{column.columns}}"
                           disableColumnMove=true
-                          footerTemplate="nestedFooter"
-                          rowEditorTemplate="nestedTableEditor">
-
-            <template id="nestedFooter">
-              <div horizontal="" layout="" center="">
-                  <button type="button"
-                          class="btn btn-default"
-                          value="{{data}}"
                           >
-                      Add Ion
-                  </button>
-              </div>
-            </template>
-
-            <template id="nestedTableEditor">
-              <td horizontal layout on-dblclick="{{closeEdit}}">
-                <div flex horizontal layout center class="form-group">
-                  <input type='text'
-                         value="{{record.row.ion}}"
-                         class="form-control"
-                         on-change="window.constructor.update()">
-                </div>
-              </td>
-              <td>
-                <div class="form-group has-success has-feedback">
-                  <input type="number"
-                         class="form-control"
-                         value="{{record.row.concentration}}"
-                         step=".001"
-                         on-change="window.constructor.update()">
-                </div>
-              </td>
-            </template>
-
           </sortable-table>
         </td>
       </template>
@@ -68,7 +56,7 @@
                    on-change="window.constructor.update()">
           </div>
         </td>
-        <td>
+        <td on-dblclick="{{closeEdit}}">
           <div class="form-group has-success has-feedback">
             <input type="number"
                    class="form-control"
@@ -97,5 +85,11 @@
           onclick=window.constructor.add_zone()>
     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
     Add Zone
+  </button>
+  <button type="button"
+          class="btn btn-default"
+          onclick=window.constructor.remove_zone()>
+    <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+    Remove Zone
   </button>
 </div>

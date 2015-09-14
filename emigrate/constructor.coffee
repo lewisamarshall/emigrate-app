@@ -40,6 +40,7 @@ class Constructor
   ]
 
   columns: [
+    {name: 'remove', title:''}
     {name: 'zone', title: 'Zone'},
     {name: 'length',title: 'Length'},
     {
@@ -73,6 +74,18 @@ class Constructor
       n_nodes: 151
     @link.write(JSON.stringify(serial))
 
+  save: =>
+    file = dialog.showSaveDialog(
+      properties: ['openFile']
+      filters: [{name: 'JSON', extensions: ['json']}]
+    )
+    serial =
+      solutions: (@parse_solution(zone.solution) for zone in @data)
+      lengths: (zone.length for zone in @data)
+      n_nodes: 151
+      save: file
+    @link.write(JSON.stringify(serial))
+
   parse_solution: (solution)->
     serial =
       __solution__: true
@@ -93,6 +106,9 @@ class Constructor
         { ion: 'hydrochloric acid', concentration: 0.001},
       ]
     )
+
+  remove_zone: =>
+    @data.pop()
 
   add_ion: (n)=>
     console.log(n)
