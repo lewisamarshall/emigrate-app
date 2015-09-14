@@ -20,6 +20,7 @@ simulation_chart_properties = chart_properties.simulation_chart_properties
 class Simulator
   panes: null
   table: null
+  state: 'stop'
 
   constructor: ->
     @simulation_chart = c3.generate(simulation_chart_properties)
@@ -30,35 +31,54 @@ class Simulator
       properties: ['openFile']
       filters: [{name: 'JSON', extensions: ['json']}]
     )[0]
-    @link = new Link('emigrate', ['load', '--io', @initial_condition], @draw)
+    @link = new Link('emigrate', ['load', @initial_condition, 'echo'], @draw)
     @link.write(0)
 
   run: =>
-    console.log(@initial_condition)
     file = dialog.showSaveDialog(
       properties: ['openFile']
       filters: [{name: 'HDF5', extensions: ['hdf5']}]
     )
-    @stop()
     @link = new Link('emigrate', ['load', @initial_condition,
-                                  'solve', '--io', '-t', '10.0', '-d', '1.0',
+                                  'solve', '-t', '50.0', '--io',
                                   '--output', file], @draw)
 
   stop: =>
     @link?.kill()
 
-draw: (data) =>
-  """Callback function to draw new frame data."""
-  # If this is the first callback, create the slider
-  console.log(data)
-  if data.nodes?
-    concentrations = {'x': data.nodes.data}
-    concentrations[data.ions[i].name] = c for c, i in data.concentrations.data
-    @simulation_chart.load(json:concentrations)
+  draw: (data) =>
+    """Callback function to draw new frame data."""
+    # If this is the first callback, create the slider
+    if data.nodes?
+      concentrations = {'x': data.nodes.data}
+      concentrations[data.ions[i].name] = c for c, i in data.concentrations.data
+      @simulation_chart.load(json:concentrations)
 
+    if data.error?
+      console.log(data.error)
 
-  if data.error?
-    console.log(data.error)
+  buttonPlayPress: =>
+      if(state=='stop'){
+        state='play';
+        var button = d3.select("#button_play").classed('btn-success', true);
+        button.select("i").attr('class', "fa fa-pause");
+      }
+      else if(state=='play' || state=='resume'){
+        state = 'pause';
+        d3.select("#button_play i").attr('class', "fa fa-play");
+      }
+      else if(state=='pause'){
+        state = 'resume';
+        d3.select("#button_play i").attr('class', "fa fa-pause");
+      }
+      console.log("button play pressed, play was "+state);
+
+  function buttonStopPress(){
+      state = 'stop';
+      var button = d3.select("#button_play").classed('btn-success', false);
+      button.select("i").attr('class', "fa fa-play");
+      console.log("button stop invoked.");
+  }
 
   # @set_panes()
   # add_ion: (ion, concentration)->
@@ -89,5 +109,7 @@ draw: (data) =>
   # showall: ->
   #   for own k,v of @panes
   #     @show(k)
+
+
 
 exporter.simulator = new Simulator()

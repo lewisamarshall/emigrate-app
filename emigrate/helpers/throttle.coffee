@@ -8,8 +8,6 @@ throttle = (fn, threshhold, scope) ->
   return ->
     context = scope || this
     now = +new Date
-    # console.log('now: ' + now)
-    # console.log('last: ' + last)
     args = arguments
 
     if (last && now < last + threshhold)

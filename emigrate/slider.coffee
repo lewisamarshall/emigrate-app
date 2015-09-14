@@ -87,7 +87,6 @@ class Slider
         value = d3.round(that.x_scale.invert(thing))
         that.brush.extent([value, value])
       if value >= (that.domain-1)
-        console.log(value)
         value = that.domain-1
       if (value <= 0)
         value = 0
