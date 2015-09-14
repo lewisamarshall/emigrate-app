@@ -14,6 +14,7 @@ constructor_chart_properties = chart_properties.constructor_chart_properties
 class Constructor
   data: [
     {
+      remove: true
       zone: 'Trailing Electrolyte',
       length: .005,
       solution : [
@@ -84,6 +85,7 @@ class Constructor
       lengths: (zone.length for zone in @data)
       n_nodes: 151
       save: file
+    console.log(JSON.stringify(serial))
     @link.write(JSON.stringify(serial))
 
   parse_solution: (solution)->
