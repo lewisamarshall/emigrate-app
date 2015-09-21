@@ -22,6 +22,7 @@ class Constructor
       solutions: (@parse_solution(zone.solution) for zone in @data)
       lengths: (zone.length for zone in @data)
       n_nodes: 151
+      current: -500
     @link.write(JSON.stringify(serial))
 
   save: =>
@@ -33,6 +34,7 @@ class Constructor
       solutions: (@parse_solution(zone.solution) for zone in @data)
       lengths: (zone.length for zone in @data)
       n_nodes: 151
+      current: -500
       save: file
     console.log(JSON.stringify(serial))
     @link.write(JSON.stringify(serial))
