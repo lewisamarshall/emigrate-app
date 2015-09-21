@@ -42,6 +42,7 @@
         </li>
       </ul>
 
+      <!-- Home Tab -->
       <div class="tab-content">
         <div role="tabpanel" class="tab-pane active fade in" id="home">
           <link rel="import" href="./home.html" id="home-content-link">
@@ -52,6 +53,8 @@
             scr.parentNode.insertBefore(el.cloneNode(true), scr);
           </script>
         </div>
+
+        <!-- Constructor Tab-->
         <div role="tabpanel" class="tab-pane fade" id="con">
           <link rel="import" href="./constructor.html" id="constructor-content-link">
           <script id='constructor-content-script'>
@@ -62,6 +65,8 @@
           </script>
           <script src="./constructor.js"></script>
         </div>
+
+        <!-- Simulator Tab -->
         <div role="tabpanel" class="tab-pane fade" id="sim">
           <link rel="import" href="./simulator.html" id="sim-content-link">
           <script id='sim-content-script'>
@@ -72,6 +77,8 @@
           </script>
           <script src='./simulator.js'></script>
         </div>
+
+        <!-- Visualization Tab -->
         <div role="tabpanel" class="tab-pane fade" id="viz">
           <link rel="import" href="./player.html" id="player-content-link">
           <script id='player-content-script'>
@@ -82,6 +89,7 @@
           </script>
           <script src="./player.js"></script>
         </div>
+
       </div>
     </div>
   </div>
