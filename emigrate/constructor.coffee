@@ -12,60 +12,10 @@ chart_properties = require('./chart_properties')
 constructor_chart_properties = chart_properties.constructor_chart_properties
 
 class Constructor
-  data: [
-    {
-      remove: true
-      zone: 'Trailing Electrolyte',
-      length: .005,
-      solution : [
-        { ion: 'tris', concentration: 0.1},
-        { ion: 'caproic acid', concentration: 0.2},
-        { ion: 'hepes', concentration: 0.2},
-      ]
-    },{
-      zone: 'Sample',
-      length: .005,
-      solution : [
-        { ion: 'alexa fluor 488', concentration: 0.001},
-        { ion: 'tris', concentration: 0.02},
-        { ion: 'hydrochloric acid', concentration: 0.01},
-      ]
-    },{
-      zone: 'Leading Electrolyte',
-      length: .005,
-      solution : [
-        { ion: 'hydrochloric acid', concentration: 0.1},
-        { ion: 'tris', concentration: 0.2},
-      ]
-    }
-  ]
-
-  columns: [
-    {name: 'remove', title:''}
-    {name: 'zone', title: 'Zone'},
-    {name: 'length',title: 'Length'},
-    {
-      name: 'solution',
-      title: 'Solution',
-      columns: [
-          { name:'ion', title:'Ion'},
-          { name:'concentration', title: 'Concentration'},
-        ],
-    }
-  ]
-
-
-  model:
-    data: @data
-    columns: @columns
 
   constructor: ->
-    @model =
-      data: @data
-      columns: @columns
     @link = new Link('emigrate', ['construct', '--io'], @draw)    # @set_panes()
     @constructor_chart = c3.generate(constructor_chart_properties)
-    @update()
 
   update: =>
     serial =
@@ -95,6 +45,7 @@ class Constructor
 
   draw: (data) =>
     """Callback function to draw new frame data."""
+    # @constructor_chart.unload()
     concentrations = {'x': data.nodes.data}
     concentrations[data.ions[i].name] = c for c, i in data.concentrations.data
     @constructor_chart.load(json:concentrations)
@@ -120,5 +71,7 @@ exporter.constructor = new Constructor()
 
 window.addEventListener('polymer-ready', ->
   table = document.getElementById('constructor_table')
-  table.model = exporter.constructor.model
+  exporter.constructor.data = table.data
+  table.data = exporter.constructor.data
+  exporter.constructor.update()
 )

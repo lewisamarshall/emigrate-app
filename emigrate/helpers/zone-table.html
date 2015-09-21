@@ -1,0 +1,158 @@
+<link rel=import href="../bower_components/polymer/polymer.min.js"></script>
+<link rel=import href="../bower_components/webcomponentsjs/webcomponents.min.js"></script>
+<link rel="import" href="../bower_components/sortable-table/sortable-table.html">
+
+
+<polymer-element name="removeZone-button" extends="button" on-click="{{remove_me}}">
+  <script>
+    Polymer({
+      remove_me: function() {
+        this.fire('remove', this);
+      }
+    })
+  </script>
+</polymer-element>
+
+<polymer-element name="removeIon-button" extends="button" on-click="{{remove_ion}}">
+  <script>
+    Polymer({
+      remove_ion: function() {
+        this.fire('removeion', this);
+      }
+    })
+  </script>
+</polymer-element>
+
+<polymer-element name="add-button" extends="button" on-click="{{add_zone}}">
+  <script>
+    Polymer({
+      add_zone: function() {
+        this.fire('add', this);
+      }
+    })
+  </script>
+</polymer-element>
+
+<polymer-element name="addion-button" extends="button" on-click="{{add_ion}}">
+  <script>
+    Polymer({
+      add_ion: function() {
+        this.fire('addion', this);
+      }
+    })
+  </script>
+</polymer-element>
+
+<polymer-element name="zone-table" on-remove="{{removeit}}"
+                 on-removeion="{{removemyion}}"  on-add="{{addit}}"
+                 on-addion="{{addion}}" attributes='data'>
+  <template>
+    <sortable-table class="bootstrap" data="{{data}}" columns="{{columns}}" userSort=true disableColumnMove=true rowTemplate='row' on-removeEvent="{{remove}}" selected={{selected}} rowSelection=true>
+      <template id="row">
+        <td>
+          <button is="removeZone-button">Remove</button>
+        </td>
+
+        <td> {{record.row.zone}} </td>
+
+        <td> {{record.row.length}}</td>
+
+        <td>
+          <sortable-table class="bootstrap" style="width:100%" data="{{record.row.solution}}" disableColumnMove=true rowTemplate='nestedRow'>
+            <template id='nestedRow'>
+              <td>
+                <button is="removeIon-button">-</button>
+              </td>
+
+              <td> {{record.row.ion}} </td>
+
+              <td> {{record.row.concentration}}</td>
+            </template>
+          </sortable-table>
+          <button is="addion-button">+</button>
+        </td>
+      </template>
+    </sortable-table>
+
+    <button is="add-button">Add</button>
+
+  </template>
+  <script>
+    Polymer({
+      removeit: function(event, msg) {
+        console.log(event)
+        console.log(event.path[2].rowIndex);
+        this.data.splice(event.path[2].rowIndex - 1, 1)
+      },
+
+      removemyion: function(event, msg) {
+        ionrow = event.path[2].rowIndex-1;
+        zonerow = event.path[8].rowIndex-1;
+        console.log(event)
+        console.log([ionrow, zonerow]);
+        this.data[zonerow].solution.splice(ionrow, 1)
+      },
+
+      addit: function(event, msg) {
+        console.log(event)
+        this.data.push({
+          zone: 'New Zone',
+          length: .005,
+          solution : [
+            { ion: 'hydrochloric acid', concentration: 0.001},
+          ]
+        })
+      },
+
+      addion: function(event, msg) {
+        console.log(event)
+        zonerow = event.path[2].rowIndex-1;
+
+        this.data[zonerow].solution.push({ ion: 'hydrochloric acid', concentration: 0.1})
+      },
+
+      data: [
+        {
+          zone: 'Trailing Electrolyte',
+          length: .005,
+          solution : [
+            { ion: 'tris', concentration: 0.1},
+            { ion: 'caproic acid', concentration: 0.2},
+            { ion: 'hepes', concentration: 0.2},
+          ],
+        },{
+          zone: 'Sample',
+          length: .005,
+          solution : [
+            { ion: 'alexa fluor 488', concentration: 0.001},
+            { ion: 'tris', concentration: 0.02},
+            { ion: 'hydrochloric acid', concentration: 0.01},
+          ],
+        },{
+          zone: 'Leading Electrolyte',
+          length: .005,
+          solution : [
+            { ion: 'hydrochloric acid', concentration: 0.1},
+            { ion: 'tris', concentration: 0.2},
+          ],
+        }
+      ],
+
+      columns: [
+        {name: 'remove', title:''},
+        {name: 'zone', title: 'Zone'},
+        {name: 'length',title: 'Length'},
+        {
+          name: 'solution',
+          title: 'Solution',
+          columns: [
+              {name: 'remove', title:''},
+              { name:'ion', title:'Ion'},
+              { name:'concentration', title: 'Concentration'},
+            ],
+        }
+      ]
+    });
+  </script>
+</polymer-element>
+<zone-table></zone-table>
