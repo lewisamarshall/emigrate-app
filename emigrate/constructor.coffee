@@ -47,7 +47,6 @@ class Constructor
     {
       name: 'solution',
       title: 'Solution',
-      cellTemplate: 'nestedTable',
       columns: [
           { name:'ion', title:'Ion'},
           { name:'concentration', title: 'Concentration'},

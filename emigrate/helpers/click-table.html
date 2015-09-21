@@ -9,9 +9,9 @@
     </script>
 </polymer-element>
 
-<polymer-element id='myclicktable' name="click-table" on-remove="{{removeit}}" attributes='mydata'>
+<polymer-element id='myclicktable' name="click-table" on-remove="{{removeit}}" attributes='data'>
     <template>
-        <sortable-table id='emb' name="click-table-embedded" rowTemplate='row' data={{mydata}}>
+        <sortable-table id='emb' name="click-table-embedded" rowTemplate='row' data={{data}}>
           <template id="row">
             <td>
                 <button is="remove-button" myprop={{record.row.fruit}}>Remove</button>
@@ -35,10 +35,10 @@
         removeit: function(event, msg){
           console.log(event.path[2].rowIndex);
           console.log(this.mydata)
-          this.mydata.splice(event.path[2].rowIndex-1, 1)
+          this.data.splice(event.path[2].rowIndex-1, 1)
         },
 
-        mydata: [{fruit: 'apple', alice: 4, bill: 10, casey: 2 },
+        data: [{fruit: 'apple', alice: 4, bill: 10, casey: 2 },
         {fruit: 'banana', alice: 0, bill: 4, casey: 0 },
         {fruit: 'grape', alice: 2, bill: 3, casey: 5 },
         {fruit: 'pear', alice: 4, bill: 2, casey: 8 },

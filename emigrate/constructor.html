@@ -5,101 +5,49 @@
   <!-- Chart -->
   <div id="constructor_chart" class='chart'></div>
   <!-- Table -->
-  <template id="constructor_table" bind>
-    <sortable-table class="bootstrap"
-                    data="{{data}}"
-                    columns="{{columns}}"
-                    userSort=true
-                    disableColumnMove=true
-                    rowTemplate='row'
-                    rowEditorTemplate="editor"
-                    >
-      <template id="row">
-        <td>
-          <button type="button"
-                  class="btn btn-default"
-                  onclick={{row.length}}>
-                  Remove
-          </button>
-        </td>
-        <td>
-          {{record.row.zone}}
-        </td>
-        <td>
-          {{record.row.length}}
-        </td>
-        <td>
-          <sortable-table class="bootstrap"
-                          style="width:100%"
-                          data="{{record.row.solution}}"
-                          disableColumnMove=true
-                          >
-          </sortable-table>
-        </td>
-      </template>
 
-      <!-- nested table as a cell -->
-      <template id="nestedTable">
-        <td style="padding:0;">
-          <sortable-table class="bootstrap"
-                          style="width:100%"
-                          data="{{row[column.name]}}"
-                          columns="{{column.columns}}"
-                          disableColumnMove=true
-                          >
-          </sortable-table>
-        </td>
-      </template>
+    <template id="constructor_table" bind>
+      <sortable-table class="bootstrap"
+                      data="{{data}}"
+                      columns="{{columns}}"
+                      userSort=true
+                      disableColumnMove=true
+                      rowTemplate='row'
+                      on-removeEvent="{{remove}}"
+                      selected={{selected}}
+                      rowSelection=true
+                      >
+        <template id="row">
+          <td>
+            <button type="button"
+                    class="btn btn-default"
+                    onclick={{row.length}}>
+                    Remove
+            </button>
+          </td>
 
-      <template id="removeZone">
-        <td style="padding:0;">
+          <td> {{record.row.zone}} </td>
 
-        </td>
-      </template>
-      <!-- Editor -->
-      <template id="editor">
-        <td horizontal layout on-dblclick="{{closeEdit}}">
-          <div flex horizontal layout center class="form-group">
-            <input type='text'
-                   value="{{record.row.zone}}"
-                   class="form-control"
-                   on-change="window.constructor.update()">
-          </div>
-        </td>
-        <td on-dblclick="{{closeEdit}}">
-          <div class="form-group has-success has-feedback">
-            <input type="number"
-                   class="form-control"
-                   value="{{record.row.length}}"
-                   step=".001"
-                   on-change="window.constructor.update()">
-          </div>
-        </td>
-        <td>
-          <template id="nestedTableEditor">
-            <td style="padding:0;">
-              <sortable-table class="bootstrap"
-                              style="width:100%"
-                              data="{{row[column.name]}}"
-                              columns="{{column.columns}}"
-                              disableColumnMove=true>
-              </sortable-table>
-            </td>
-          </template>
-        </td>
-      </template>
-    </sortable-table>
-  </template>
+          <td> {{record.row.length}}</td>
+
+          <td>
+            <sortable-table class="bootstrap"
+                            style="width:100%"
+                            data="{{record.row.solution}}"
+                            disableColumnMove=true
+                            >
+            </sortable-table>
+            Add
+          </td>
+        </template>
+      </sortable-table>
+    </template>
+
   <button type="button"
           class="btn btn-default"
           onclick=window.constructor.add_zone()>
     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
     Add Zone
   </button>
-  <button type="button"
-          class="btn btn-default"
-          onclick=window.constructor.remove_zone()>
-    <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
-    Remove Zone
-  </button>
+
 </div>
