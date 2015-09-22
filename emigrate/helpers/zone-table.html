@@ -1,9 +1,10 @@
 <link rel=import href="../bower_components/polymer/polymer.min.js"></script>
 <link rel=import href="../bower_components/webcomponentsjs/webcomponents.min.js"></script>
 <link rel="import" href="../bower_components/sortable-table/sortable-table.html">
+<link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
+<link rel="stylesheet" href="../bower_components/sortable-table/css/bootstrap.css" shim-shadowdom>
 
-
-<polymer-element name="removeZone-button" extends="button" on-click="{{remove_me}}">
+<polymer-element name="removeZone-button" class="btn btn-default" extends="button" on-click="{{remove_me}}">
   <script>
     Polymer({
       remove_me: function() {
@@ -13,7 +14,7 @@
   </script>
 </polymer-element>
 
-<polymer-element name="removeIon-button" extends="button" on-click="{{remove_ion}}">
+<polymer-element name="removeIon-button" class="btn btn-default" extends="button" on-click="{{remove_ion}}">
   <script>
     Polymer({
       remove_ion: function() {
@@ -23,7 +24,8 @@
   </script>
 </polymer-element>
 
-<polymer-element name="add-button" extends="button" on-click="{{add_zone}}">
+<polymer-element name="add-button" class="btn btn-default" extends="button" on-click="{{add_zone}}">
+
   <script>
     Polymer({
       add_zone: function() {
@@ -33,7 +35,7 @@
   </script>
 </polymer-element>
 
-<polymer-element name="addion-button" extends="button" on-click="{{add_ion}}">
+<polymer-element class="btn btn-default" name="addion-button" extends="button" on-click="{{add_ion}}">
   <script>
     Polymer({
       add_ion: function() {
@@ -46,7 +48,12 @@
 <polymer-element name="zone-table" on-remove="{{removeit}}"
                  on-removeion="{{removemyion}}"  on-add="{{addit}}"
                  on-addion="{{addion}}" attributes='data'>
+
   <template>
+  <link rel="stylesheet" href="../bower_components/sortable-table/css/bootstrap.css" shim-shadowdom>
+  <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
+
+    <div class="panel panel-default">
     <sortable-table class="bootstrap" data="{{data}}" columns="{{columns}}" userSort=true disableColumnMove=true rowTemplate='row' on-removeEvent="{{remove}}" selected={{selected}} rowSelection=true>
       <template id="row">
         <td>
@@ -82,7 +89,7 @@
         </td>
       </template>
     </sortable-table>
-
+  </div>
     <button is="add-button">Add</button>
 
   </template>
