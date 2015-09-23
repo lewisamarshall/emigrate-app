@@ -14,7 +14,7 @@
   </script>
 </polymer-element>
 
-<polymer-element name="removeIon-button" class="btn btn-default" extends="button" on-click="{{remove_ion}}">
+<polymer-element name="removeIon-button" class="btn btn-sm btn-default" extends="button" on-click="{{remove_ion}}">
   <script>
     Polymer({
       remove_ion: function() {
@@ -35,7 +35,7 @@
   </script>
 </polymer-element>
 
-<polymer-element class="btn btn-default" name="addion-button" extends="button" on-click="{{add_ion}}">
+<polymer-element class="btn btn-sm btn-default" name="addion-button" extends="button" on-click="{{add_ion}}">
   <script>
     Polymer({
       add_ion: function() {
@@ -54,41 +54,55 @@
   <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
 
     <div class="panel panel-default">
-    <sortable-table class="bootstrap" data="{{data}}" columns="{{columns}}" userSort=true disableColumnMove=true rowTemplate='row' on-removeEvent="{{remove}}" selected={{selected}} rowSelection=true>
+      <div class="panel-heading">Zone Setup</div>
+      <div style="overflow: scroll;height: 370px;">
+
+    <sortable-table class="bootstrap" data="{{data}}" columns="{{columns}}" userSort=true disableColumnMove=true rowTemplate='row' on-removeEvent="{{remove}}" selected={{selected}} rowSelection=false>
       <template id="row">
-        <td>
+        <td style="vertical-align:middle" width="10%">
           <button is="removeZone-button">Remove</button>
         </td>
 
-        <td><input class="form-control" value="{{record.row.zone}}"></td>
+        <td style="vertical-align:middle" width="20%"><input class="form-control" style="height:28px;font-size:12px;" value="{{record.row.zone}}"></small></td>
 
-        <td><input type='number' class="form-control" value="{{record.row.length}}"></td>
+        <td style="vertical-align:middle" width="15%"><input type='number' style="height:28px;font-size:12px;" class="form-control" value="{{record.row.length}}"></td>
 
         <td>
+          <div class="panel panel-default panel-heading">
           <sortable-table class="bootstrap" style="width:100%" data="{{record.row.solution}}"
-                          disableColumnMove=true rowTemplate='nestedRow'>
+                          columns="{{columns[3].columns}}" disableColumnMove=true rowTemplate='nestedRow'>
             <template id='nestedRow'>
               <td>
-                <button is="removeIon-button">-</button>
+                <button is="removeIon-button" style="height:28px;font-size:12px;">-</button>
               </td>
 
-              <td><select value="{{record.row.ion}}">
+              <td><select class="form-control" value="{{record.row.ion}}" style="height:28px;font-size: 12px;">
 								<option value="hydrochloric acid">chloride</option>
 								<option value="tris">tris</option>
 								<option value="hepes">hepes</option>
 								<option value="caproic acid">caproic acid</option>
-								<option value="alexa fluor 488">alexa fluor 488</option>
+								<option value="alexa fluor 488">Alexa Fluor 488</option>
+                <option value="acetic acid">acetic acid</option>
+                <option value="fluorescein">fluorescein</option>
+                <option value="mops">MOPS</option>
+                <option value="b-alanine">b-alanine</option>
+                <option value="pyridine">pyridine</option>
+                <option value="aniline">aniline</option>
+                <option value="rhodamine 6g">rhodamine 6g</option>
+                <option value="bis-tris">bis-tris</option>
 							</select>
               </td>
 
-              <td><input type='number' value="{{record.row.concentration}}"></td>
+              <td><input type='number' class="form-control"  value="{{record.row.concentration}}" style="height:28px;font-size: 12px;"></td>
 
             </template>
           </sortable-table>
-          <button is="addion-button">+</button>
+        </div>
+          <button is="addion-button" style="height:28px;font-size: 12px;">+</button>
         </td>
       </template>
     </sortable-table>
+  </div>
   </div>
     <button is="add-button">Add</button>
 
@@ -103,7 +117,7 @@
 
       removemyion: function(event, msg) {
         ionrow = event.path[2].rowIndex-1;
-        zonerow = event.path[8].rowIndex-1;
+        zonerow = event.path[9].rowIndex-1;
         console.log(event)
         console.log([ionrow, zonerow]);
         this.data[zonerow].solution.splice(ionrow, 1)

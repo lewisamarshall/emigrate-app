@@ -21,8 +21,11 @@ class Constructor
     serial =
       solutions: (@parse_solution(zone.solution) for zone in @data)
       lengths: (zone.length for zone in @data)
-      n_nodes: 151
-      current: -500
+      n_nodes: parseInt(document.getElementById('grid_input').value, 10)
+      current: parseFloat(document.getElementById('current_input').value)
+      interface_length: parseFloat(document.getElementById('interface_input').value)
+
+    console.log(serial)
     @link.write(JSON.stringify(serial))
 
   save: =>
@@ -33,8 +36,8 @@ class Constructor
     serial =
       solutions: (@parse_solution(zone.solution) for zone in @data)
       lengths: (zone.length for zone in @data)
-      n_nodes: 151
-      current: -500
+      n_nodes: parseInt(document.getElementById('grid_input').value, 10)
+      current: parseFloat(document.getElementById('current_input').value)
       save: file
     console.log(JSON.stringify(serial))
     @link.write(JSON.stringify(serial))

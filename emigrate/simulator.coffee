@@ -24,6 +24,7 @@ class Simulator
 
   constructor: ->
     @simulation_chart = c3.generate(simulation_chart_properties)
+    @progressbar = document.getElementById('simulatorProgress')
 
   load: =>
     @stop()
@@ -39,9 +40,13 @@ class Simulator
       properties: ['openFile']
       filters: [{name: 'HDF5', extensions: ['hdf5']}]
     )
+    @maxtime = parseFloat(document.getElementById('time_input').value)
+    dt = parseFloat(document.getElementById('dt_input').value)
     @link = new Link('emigrate', ['load', @initial_condition,
-                                  'solve', '--io',
+                                  'solve', '--io', '-t', @maxtime, '-d', dt,
                                   '--output', file], @draw)
+    @progressbar.classList.add('active')
+
 
   stop: =>
     @link?.kill()
@@ -53,6 +58,14 @@ class Simulator
       concentrations = {'x': data.nodes.data}
       concentrations[data.ions[i].name] = c for c, i in data.concentrations.data
       @simulation_chart.load(json:concentrations)
+      d3.select('#simulationTime').text(data.time + ' s')
+
+      @progressbar.style.width = data.time/@maxtime * 100 + '%'
+      @progressbar.ariaValuenow = data.time/@maxtime * 100 + '%'
+      if data.time == @maxtime
+        @progressbar.classList.remove('active')
+
+
 
     if data.error?
       console.log(data.error)

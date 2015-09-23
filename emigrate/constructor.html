@@ -4,9 +4,58 @@
 
   <button class='btn btn-default navbar-btn' onclick=window.constructor.update()>Update</button>
   <button class='btn btn-primary navbar-btn' onclick=window.constructor.save()>Save</button>
+
   <!-- Chart -->
   <div id="constructor_chart" class='chart'></div>
-  <!-- Table -->
-  <zone-table id='constructor_table'></zone-table>
 
+  <!-- Table -->
+  <div class='panel-group col-md-8'
+       id="option-container"
+       role="tablist"
+       aria-multiselectable="true">
+  <div class="panel-body">
+
+  <zone-table id='constructor_table'></zone-table>
+  </div>
+  </div>
+  <!-- Properties -->
+  <div class='panel-group col-md-4'
+       id="option-container"
+       role="tablist"
+       aria-multiselectable="true">
+
+       <div class="panel-body">
+         <div class="panel panel-default">
+         <div class="panel-heading">Properties Setup</div>
+
+         <table class='table table-condensed'>
+
+           <tr><td>Grid Points</td>
+             <td><input id='grid_input' type="number" value="151"></input></td>
+           </tr>
+
+           <tr><td>Interface Length</td>
+             <td><input id='interface_input' type="number" value=".0005"></input></td>
+           </tr>
+
+           <tr><td>Field Mode</td>
+             <td><select>
+                 <option value="Voltage">Voltage</option>
+                 <option value="Current">Current</option>
+               </select></td>
+           </tr>
+
+           <tr>
+             <td>Voltage (V)</td>
+             <td><input type="number" placeholder="100"></input></td>
+           </tr>
+
+           <tr><td>Current (Amps)</td>
+             <td><input id='current_input' type="number" value="-500"></input></td>
+           </tr>
+
+         </table>
+       </div>
+  </div>
+</div>
 </div>
