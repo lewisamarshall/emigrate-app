@@ -8,7 +8,6 @@ path = require 'path'
 require('crash-reporter').start()
 processes.env.PATH = path.join(__dirname, '../bin') + ':' + processes.env.PATH
 
-
 # Keep a global reference of the window object. if you don't,
 # the window will be closed automatically when the javascript object is GCed.
 mainWindow = null

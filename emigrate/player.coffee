@@ -41,8 +41,7 @@ class Player
     @frame = 0
     file = dialog.showOpenDialog(
       properties: ['openFile']
-      filters: [{name: 'JSON', extensions: ['json']},
-        {name: 'HDF5', extensions: ['hdf5']}]
+      filters: [{name: 'HDF5', extensions: ['hdf5']}]
     )[0]
     @link = new Link('emigrate', ['load', '--io', file], @draw)
     @link.write(@frame)

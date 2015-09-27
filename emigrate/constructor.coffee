@@ -3,7 +3,6 @@ exporter = this
 remote = require 'remote'
 dialog = remote.require 'dialog'
 
-console.log(process.env.PATH)
 # Chart Components
 d3 = require './bower_components/d3/d3.js'
 c3 = require './bower_components/c3/c3.js'
@@ -16,10 +15,7 @@ constructor_chart_properties = chart_properties.constructor_chart_properties
 class Constructor
 
   constructor: ->
-    @link = new Link('emigrate', ['construct', '--io'], @draw)    # @set_panes()
-    # @link = new Link('emigrate', ['load', '--io', '/Users/lewis/Desktop/Untitled.hdf5'], @draw)
-    # @link.write(1)
-
+    @link = new Link('emigrate', ['construct', '--io'], @draw)
     @constructor_chart = c3.generate(constructor_chart_properties)
 
   update: =>
@@ -30,7 +26,6 @@ class Constructor
       current: parseFloat(document.getElementById('current_input').value)
       interface_length: parseFloat(document.getElementById('interface_input').value)
 
-    console.log(serial)
     @link.write(JSON.stringify(serial))
 
   save: =>
@@ -44,7 +39,6 @@ class Constructor
       n_nodes: parseInt(document.getElementById('grid_input').value, 10)
       current: parseFloat(document.getElementById('current_input').value)
       save: file
-    console.log(JSON.stringify(serial))
     @link.write(JSON.stringify(serial))
 
   parse_solution: (solution)->
@@ -55,8 +49,6 @@ class Constructor
 
   draw: (data) =>
     """Callback function to draw new frame data."""
-    console.log(data)
-    # @constructor_chart.unload()
     concentrations = {'x': data.nodes.data}
     concentrations[data.ions[i].name] = c for c, i in data.concentrations.data
     @constructor_chart.load(json:concentrations)
@@ -74,7 +66,6 @@ class Constructor
     @data.pop()
 
   add_ion: (n)=>
-    console.log(n)
     @data[n].solution.push({ ion: 'hydrochloric acid', concentration: 0.001})
 
 

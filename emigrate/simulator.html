@@ -1,8 +1,13 @@
 <div id='sim-content'>
   <button class='btn btn-default navbar-btn'
-          onclick=window.simulator.load()>Load</button>
-  <button class='btn btn-default navbar-btn'
-          onclick=window.simulator.run()>Run</button>
+          onclick=window.simulator.load()>
+    <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
+
+        </button>
+  <button id='button_run' class='btn btn-default navbar-btn'
+          onclick=window.simulator.buttonPlayPress()>
+          <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+        </button>
   <!-- Configuration Panels -->
   <div class='panel-group col-md-4'
        id="option-container"
@@ -60,7 +65,7 @@
       <div class='panel-heading' role="tab" id="headingFields">
         <h4 class="panel-title">
           <a class='collapsed' data-toggle="collapse" data-parent="#option-container" href="#fields_collapse" aria-expanded="false" aria-controls="fields_collapse">
-                            Fields
+                            Timing
                         </a>
         </h4>
       </div>

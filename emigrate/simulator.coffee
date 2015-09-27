@@ -32,6 +32,7 @@ class Simulator
       properties: ['openFile']
       filters: [{name: 'JSON', extensions: ['json']}]
     )[0]
+    @simulation_chart.unload()
     @link = new Link('emigrate', ['load', @initial_condition, 'echo'], @draw)
     @link.write(0)
 
@@ -47,9 +48,10 @@ class Simulator
                                   '--output', file], @draw)
     @progressbar.classList.add('active')
 
-
   stop: =>
     @link?.kill()
+    @progressbar.classList.remove('active')
+
 
   draw: (data) =>
     """Callback function to draw new frame data."""
@@ -65,64 +67,20 @@ class Simulator
       if data.time == @maxtime
         @progressbar.classList.remove('active')
 
-
-
     if data.error?
       console.log(data.error)
-  #
-  # buttonPlayPress: =>
-  #     if(state=='stop'){
-  #       state='play';
-  #       var button = d3.select("#button_play").classed('btn-success', true);
-  #       button.select("i").attr('class', "fa fa-pause");
-  #     }
-  #     else if(state=='play' || state=='resume'){
-  #       state = 'pause';
-  #       d3.select("#button_play i").attr('class', "fa fa-play");
-  #     }
-  #     else if(state=='pause'){
-  #       state = 'resume';
-  #       d3.select("#button_play i").attr('class', "fa fa-pause");
-  #     }
-  #     console.log("button play pressed, play was "+state);
-  #
-  # function buttonStopPress(){
-  #     state = 'stop';
-  #     var button = d3.select("#button_play").classed('btn-success', false);
-  #     button.select("i").attr('class', "fa fa-play");
-  #     console.log("button stop invoked.");
-  # }
 
-  # @set_panes()
-  # add_ion: (ion, concentration)->
-  #   if not @table
-  #     @table = document.getElementById('ion_table')
-  #
-  # set_panes: ->
-  #   @panes = {
-  #     'numerics': document.getElementById('numerics'),
-  #     'solutions': document.getElementById('solutions'),
-  #     'fields': document.getElementById('fields'),
-  #   }
-  #   @show('numerics')
-  #
-  # show: (item)->
-  #   @panes[item].style.display = 'inline'
-  #
-  # hide: (item)->
-  #   @panes[item].style.display = 'none'
-  #
-  # showonly: (item)->
-  #   for own k,v of @panes
-  #     if k==item
-  #       @show(k)
-  #     else
-  #       @hide(k)
-  #
-  # showall: ->
-  #   for own k,v of @panes
-  #     @show(k)
+  buttonPlayPress: =>
+    if @state=='stop'
+      @state='play'
+      button = d3.select("#button_run").classed('btn-success', true)
+      button.select("span").attr('class', "glyphicon glyphicon-stop")
+      @run()
 
-
+    else if @state=='play'
+      @state = 'stop'
+      button = d3.select("#button_run").classed('btn-success', false)
+      button.select("span").attr('class', "glyphicon glyphicon-play")
+      @stop()
 
 exporter.simulator = new Simulator()
