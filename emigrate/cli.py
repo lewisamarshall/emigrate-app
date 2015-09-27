@@ -3,6 +3,7 @@ from scipy.special import _ufuncs_cxx
 import scipy.linalg.cython_blas
 import scipy.linalg.cython_lapack
 import h5py.h5ac
+import ionize
 
 
 cli(obj={'sequence': None, 'frame': None})

@@ -5,7 +5,7 @@
 
 # Pack the files into the asar archives.
 asar pack emigrate/ dist/Emigrate.app/Contents/Resources/app.asar
-pyinstaller -y --onefile emigrate/cli.py -n emigrate --distpath=dist/Emigrate.app/Contents/Resources/bin
+# pyinstaller -y --onefile --additional-hooks-dir=. emigrate/cli.py -n emigrate --distpath=dist/Emigrate.app/Contents/Resources/bin
 # asar pack emigrate/ dist/Emigrate-win32/resources/app.asar
 
 # zip -ru dist/Emigrate.app.zip dist/Emigrate.app

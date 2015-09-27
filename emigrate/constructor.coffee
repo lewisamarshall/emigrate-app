@@ -84,5 +84,5 @@ window.addEventListener('polymer-ready', ->
   table = document.getElementById('constructor_table')
   exporter.constructor_obj.data = table.data
   table.data = exporter.constructor_obj.data
-  # exporter.constructor.update()
+  exporter.constructor_obj.update()
 )

@@ -2,7 +2,7 @@
 a = Analysis(['emigrate/cli.py'],
              pathex=['/Users/lewis/Documents/github/emigrate_app'],
              hiddenimports=[],
-             hookspath=None,
+             hookspath=['.'],
              runtime_hooks=None)
 pyz = PYZ(a.pure)
 exe = EXE(pyz,
