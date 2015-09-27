@@ -2,6 +2,8 @@ exporter = this
 # File dialog components
 remote = require 'remote'
 dialog = remote.require 'dialog'
+
+console.log(process.env.PATH)
 # Chart Components
 d3 = require './bower_components/d3/d3.js'
 c3 = require './bower_components/c3/c3.js'
@@ -15,6 +17,9 @@ class Constructor
 
   constructor: ->
     @link = new Link('emigrate', ['construct', '--io'], @draw)    # @set_panes()
+    # @link = new Link('emigrate', ['load', '--io', '/Users/lewis/Desktop/Untitled.hdf5'], @draw)
+    # @link.write(1)
+
     @constructor_chart = c3.generate(constructor_chart_properties)
 
   update: =>
@@ -50,6 +55,7 @@ class Constructor
 
   draw: (data) =>
     """Callback function to draw new frame data."""
+    console.log(data)
     # @constructor_chart.unload()
     concentrations = {'x': data.nodes.data}
     concentrations[data.ions[i].name] = c for c, i in data.concentrations.data
@@ -72,11 +78,11 @@ class Constructor
     @data[n].solution.push({ ion: 'hydrochloric acid', concentration: 0.001})
 
 
-exporter.constructor = new Constructor()
+exporter.constructor_obj = new Constructor()
 
 window.addEventListener('polymer-ready', ->
   table = document.getElementById('constructor_table')
-  exporter.constructor.data = table.data
-  table.data = exporter.constructor.data
-  exporter.constructor.update()
+  exporter.constructor_obj.data = table.data
+  table.data = exporter.constructor_obj.data
+  # exporter.constructor.update()
 )

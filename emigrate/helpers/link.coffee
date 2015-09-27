@@ -14,11 +14,11 @@ class Link
 
     # Call the callback through the outlet for each returned item.
     @reader = readline.createInterface(input: @process.stdout)
-    @reader.on('line', (d)->callback(JSON.parse(d)))
+    @reader.on('line', (d)->[console.log(d), callback(JSON.parse(d))])
 
     # Catch the errors
     @err_reader = readline.createInterface(input: @process.stderr)
-    @err_reader.on('line', console.log)
+    @err_reader.on('line', (d)->console.log('Link error: ' + d))
 
   kill: =>
     @process.kill()

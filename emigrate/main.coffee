@@ -1,8 +1,13 @@
 app = require 'app'
 BrowserWindow = require 'browser-window'
+processes = require 'process'
+path = require 'path'
+
 
 # Report crashes to server
 require('crash-reporter').start()
+processes.env.PATH = path.join(__dirname, '../bin') + ':' + processes.env.PATH
+
 
 # Keep a global reference of the window object. if you don't,
 # the window will be closed automatically when the javascript object is GCed.
@@ -16,12 +21,14 @@ Menu = require('menu')
 template = require('./menu-template').template
 
 
+
 # This method will be called when Electron has done everything
 # initialization and ready for creating browser windows.
 app.on('ready', ()->
   #  Create the browser window.
   # mainWindow = new BrowserWindow({width: 1000, height: 800})
   mainWindow = new BrowserWindow({fullscreen: true})
+
   mainWindow.loadUrl('file://' + __dirname + '/index.html')
 
   # Add the menu
