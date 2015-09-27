@@ -25,7 +25,6 @@ class Constructor
       n_nodes: parseInt(document.getElementById('grid_input').value, 10)
       current: parseFloat(document.getElementById('current_input').value)
       interface_length: parseFloat(document.getElementById('interface_input').value)
-
     @link.write(JSON.stringify(serial))
 
   save: =>
@@ -51,7 +50,7 @@ class Constructor
     """Callback function to draw new frame data."""
     concentrations = {'x': data.nodes.data}
     concentrations[data.ions[i].name] = c for c, i in data.concentrations.data
-    @constructor_chart.load(json:concentrations)
+    @constructor_chart.load(json:concentrations, unload:true)
 
   add_zone: =>
     @data.push(
