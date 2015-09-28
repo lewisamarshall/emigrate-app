@@ -8,9 +8,6 @@ dialog = remote.require 'dialog'
 d3 = require './bower_components/d3/d3.js'
 c3 = require './bower_components/c3/c3.js'
 
-# jQuery
-$ = jquery = require './bower_components/jquery/dist/jquery.js'
-
 # Custom Classes
 Link = require('./helpers/link.js').Link
 chart_properties = require('./chart_properties')
@@ -28,11 +25,11 @@ class Simulator
 
   load: =>
     @stop()
+    @simulation_chart.unload()
     @initial_condition = dialog.showOpenDialog(
       properties: ['openFile']
       filters: [{name: 'JSON', extensions: ['json']}]
     )[0]
-    @simulation_chart.unload()
     @link = new Link('emigrate', ['load', @initial_condition, 'echo'], @draw)
     @link.write(0)
 
