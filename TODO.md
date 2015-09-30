@@ -1,0 +1,13 @@
+- ion uniqueness
+- convert to polymer elements
+- single graph
+- screen size optimization
+- all inputs are bootstrap classed
+- remove homepage
+- move styles to css as possible
+  - figure out how styles interact with polymer properly
+  - replace d3.js slider with polymer slider
+- auto-packaging
+  - electron-packager
+  - bower components better
+  - custom sortable-table changes.np

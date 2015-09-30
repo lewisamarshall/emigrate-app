@@ -1,8 +1,5 @@
-emigrate/bower_components
-emigrate/bootstrap3
-dist
+bower_components
 *.js
-*.json
 build
 *.pyc
-examples
+assets

@@ -1,0 +1,30 @@
+{
+  "name": "emigrate",
+  "version": "0.1.0",
+  "homepage": "https://github.com/lewisamarshall/emigrate_app",
+  "authors": [
+    "Lewis A. Marshall <lewis.a.marshall@gmail.com>"
+  ],
+  "description": "An open source electrophoresis simulator.",
+  "main": "",
+  "moduleType": [],
+  "license": "N/A",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.4",
+    "c3": "~0.4.10",
+    "d3.slider": "https://github.com/turban/d3.slider.git",
+    "debug": "*",
+    "jquery": "~2.1.4",
+    "jqtree": "~1.1.0",
+    "nested-observe": "~1.2.1",
+    "sortable-table": "~0.11.1"
+  }
+}
