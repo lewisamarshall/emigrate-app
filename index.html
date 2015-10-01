@@ -30,9 +30,6 @@
     <div role="tabpanel">
       <ul class="nav nav-tabs" role="tablist" id='nav-tabs'>
         <li role="presentation" class="active">
-          <a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a>
-        </li>
-        <li role="presentation">
           <a href="#con" aria-controls="viz" role="tab" data-toggle="tab">Construct</a>
         </li>
         <li role="presentation">
@@ -43,20 +40,10 @@
         </li>
       </ul>
 
-      <!-- Home Tab -->
       <div class="tab-content">
-        <div role="tabpanel" class="tab-pane active fade in" id="home">
-          <link rel="import" href="./home.html" id="home-content-link">
-          <script id='home-content-script'>
-            var content = document.getElementById('home-content-link').import;
-            var el = content.getElementById('home-content');
-            var scr = document.getElementById('home-content-script');
-            scr.parentNode.insertBefore(el.cloneNode(true), scr);
-          </script>
-        </div>
 
         <!-- Constructor Tab-->
-        <div role="tabpanel" class="tab-pane fade" id="con">
+        <div role="tabpanel" class="tab-pane active fade in" id="con">
           <link rel="import" href="./constructor.html" id="constructor-content-link">
           <script id='constructor-content-script'>
             var content = document.getElementById('constructor-content-link').import;

@@ -1,5 +1,6 @@
-bower_components
 *.js
-build
 *.pyc
+build
 assets
+dist
+bower_components

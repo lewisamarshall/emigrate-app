@@ -1,13 +1,14 @@
 - ion uniqueness
-- convert to polymer elements
+- convert to polymer elements or react framework
 - single graph
 - screen size optimization
 - all inputs are bootstrap classed
-- remove homepage
 - move styles to css as possible
   - figure out how styles interact with polymer properly
   - replace d3.js slider with polymer slider
 - auto-packaging
-  - electron-packager
-  - bower components better
-  - custom sortable-table changes.np
+  - custom sortable-table changes to styling -> polymer element styling
+- Auto-update constructor
+- Auto-transfer constructor to simulator (same object)
+- auto-transfer simulator to player (same object)
+- fix menus
