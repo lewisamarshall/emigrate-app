@@ -2,11 +2,15 @@ app = require 'app'
 BrowserWindow = require 'browser-window'
 processes = require 'process'
 path = require 'path'
+Menu = require('menu')
 
 
 # Report crashes to server
 require('crash-reporter').start()
-processes.env.PATH = path.join(__dirname, 'assets/emigrate') + ':' + processes.env.PATH
+
+# Update the path with the local copy of emigrate
+asset_path = path.join(__dirname, 'assets/emigrate')
+processes.env.PATH = asset_path + ':' + processes.env.PATH
 
 # Keep a global reference of the window object. if you don't,
 # the window will be closed automatically when the javascript object is GCed.
@@ -16,9 +20,7 @@ mainWindow = null
 app.on('window-all-closed', ()->app.quit())
 
 # Import menu template
-Menu = require('menu')
 template = require('./menu-template').template
-
 
 
 # This method will be called when Electron has done everything
@@ -28,13 +30,12 @@ app.on('ready', ()->
   # mainWindow = new BrowserWindow({width: 1000, height: 800})
   mainWindow = new BrowserWindow({fullscreen: true})
 
-  mainWindow.loadUrl('file://' + __dirname + '/index.html')
-
   # Add the menu
-  menu = Menu.buildFromTemplate(template)
+  menu = Menu.buildFromTemplate(template(app, mainWindow))
   Menu.setApplicationMenu(menu)
 
   # and load the index.html of the app.
+  mainWindow.loadUrl('file://' + __dirname + '/index.html')
 
 
   # Emitted when the window is closed.

@@ -12,3 +12,4 @@
 - Auto-transfer constructor to simulator (same object)
 - auto-transfer simulator to player (same object)
 - fix menus
+- Load previous constructor
